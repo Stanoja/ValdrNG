@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <p>Main form without ValdrNG:</p>
+    <form [formGroup]="personForm">
+      <div>
+        <label>First name:</label>
+        <input formControlName="firstName">
+        <p *ngIf="isFirstNameInvalidInLength()">
+          First name must be between 2 and 20 characters.
+        </p>
+        <p *ngIf="isFirstNameInvalidInRequired()">
+          First name is required.
+        </p>
+      </div>
+    </form>
+  </div>
+  <div>
+    <p>Main form with ValdrNG:</p>
+    <form [formGroup]="personFormWithValrd">
+      <label>First name:</label>
+      <input formControlName="firstName" #firstName>
+      <vng-valdr-error [control]="this.personFormWithValrd.get('firstName')">
+      </vng-valdr-error>
+    </form>
+  </div>
+</div>
