@@ -9,10 +9,10 @@ import {ValdrNgService} from "../../../valdr-ng/src/lib/valdr-ng.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'valrd-ng-showcase';
+  title = 'valdr-ng-showcase';
 
   personForm!: FormGroup;
-  personFormWithValrd!: FormGroup;
+  personFormWithValdr!: FormGroup;
 
   private constraints: ValdrConstraints = {
     'Person': {
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]]
     });
     const controls = this.valdrService.createFormGroupControls(this.person, 'Person');
-    this.personFormWithValrd = this.fb.group(controls);
+    this.personFormWithValdr = this.fb.group(controls);
   }
 
   isFirstNameInvalidInLength() {

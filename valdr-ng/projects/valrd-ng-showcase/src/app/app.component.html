@@ -16,10 +16,10 @@
   </div>
   <div>
     <p>Main form with ValdrNG:</p>
-    <form [formGroup]="personFormWithValrd">
+    <form [formGroup]="personFormWithValdr">
       <label>First name:</label>
       <input formControlName="firstName" #firstName>
-      <vng-valdr-error [control]="this.personFormWithValrd.get('firstName')">
+      <vng-valdr-error [control]="this.personFormWithValdr.get('firstName')">
       </vng-valdr-error>
     </form>
   </div>
