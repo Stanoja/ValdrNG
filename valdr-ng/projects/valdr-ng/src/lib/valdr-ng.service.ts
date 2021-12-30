@@ -75,6 +75,25 @@ export class ValdrNgService {
     return controls;
   }
 
+  /**
+   * Get validators for the field of the given model.
+   *
+   * @param modelName the model name
+   * @param fieldName the field name
+   * @return validators for the given field
+   */
+  public getValidatorsForField(modelName: string, fieldName: string): ValdrValidationFn[] {
+    const modelConstraints = this.constraints[modelName];
+    if (modelConstraints === undefined) {
+      throw new Error(`No constraints provided for model ${modelName}.`);
+    }
+    const fieldConstraints = modelConstraints[fieldName];
+    if (fieldConstraints === undefined) {
+      throw new Error(`No constraints provided for ${modelName}.${fieldName}.`);
+    }
+    return this.getValidators(fieldConstraints);
+  }
+
   private getValidators(validators: any) {
     return this.validators.filter(v => v.canHandle(validators))
       .flatMap(v => v.createValidator(validators))

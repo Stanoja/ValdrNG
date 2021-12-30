@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {ValdrNgService} from './valdr-ng.service';
-import {AbstractControl, ValidatorFn} from '@angular/forms';
+import {ValidatorFn} from '@angular/forms';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
 import {ValdrValidationFn} from './model';
 
@@ -132,6 +132,45 @@ describe('ValdrNgService', () => {
 
       // then
       expect(formGroup.lastName).toEqual(jasmine.arrayContaining(['Sst', [validatorFn]]))
+    });
+  });
+
+  describe('getValidatorsForField', () => {
+    beforeEach(() => {
+      service.setConstraints({
+        'Person': {
+          'firstName': {
+            'size': {
+              'min': 2,
+              'max': 20,
+              'message': 'First name must be between 2 and 20 characters.'
+            },
+            'required': {
+              'message': 'First name is required.'
+            }
+          }
+        }
+      })
+    });
+
+    it('should throw error if the model is not present', () => {
+      // given / when / then
+      expect(() => service.getValidatorsForField('SomeModel', 'SomeField'))
+        .toThrow(new Error('No constraints provided for model SomeModel.'));
+    });
+
+    it('should throw error if the field is not present', () => {
+      // given / when / then
+      expect(() => service.getValidatorsForField('Person', 'SomeField'))
+        .toThrow(new Error('No constraints provided for Person.SomeField.'));
+    });
+
+    it('should get validators for field', () => {
+      // given / when
+      const validators = service.getValidatorsForField('Person', 'firstName');
+
+      // then
+      expect(validators).toHaveSize(3);
     });
   });
 });
