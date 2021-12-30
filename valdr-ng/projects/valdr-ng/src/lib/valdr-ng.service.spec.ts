@@ -1,9 +1,8 @@
 import {TestBed} from '@angular/core/testing';
-
 import {ValdrNgService} from './valdr-ng.service';
-import {AbstractControl, ValidatorFn} from "@angular/forms";
-import {BaseValidatorFactory} from "./validators/base-validator-factory";
-import {ValdrValidationFn} from "./model";
+import {AbstractControl, ValidatorFn} from '@angular/forms';
+import {BaseValidatorFactory} from './validators/base-validator-factory';
+import {ValdrValidationFn} from './model';
 
 describe('ValdrNgService', () => {
   let service: ValdrNgService;
@@ -65,7 +64,7 @@ describe('ValdrNgService', () => {
     // given
     const validator: BaseValidatorFactory = {
       createValidator(): ValdrValidationFn[] {
-        return [(control: AbstractControl) => null];
+        return [() => null];
       },
       canHandle(): boolean {
         return true;
@@ -94,10 +93,8 @@ describe('ValdrNgService', () => {
             }
           },
           'address': {
-            'street': {
-              'required': {
-                'message': 'Street is required.'
-              }
+            'required': {
+              'message': 'Street is required.'
             }
           }
         }

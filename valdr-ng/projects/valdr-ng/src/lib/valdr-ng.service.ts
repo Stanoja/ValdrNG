@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ValdrConstraints, ValdrValidationFn} from './model';
-import {RequiredValidatorFactory} from "./validators/required-validator-factory";
-import {BaseValidatorFactory} from "./validators/base-validator-factory";
-import {SizeValidatorFactory} from "./validators/size-validator-factory";
+import {RequiredValidatorFactory} from './validators/required-validator-factory';
+import {BaseValidatorFactory} from './validators/base-validator-factory';
+import {SizeValidatorFactory} from './validators/size-validator-factory';
 
 /**
  * ValdrNG service.

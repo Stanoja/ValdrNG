@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {ValdrNgService} from './valdr-ng.service';
-import { ValdrErrorComponent } from './valdr-error/valdr-error.component';
-import {CommonModule} from "@angular/common";
+import {CommonModule} from '@angular/common';
 
 /**
  * ValdrNG module.
@@ -10,14 +9,8 @@ import {CommonModule} from "@angular/common";
     providers: [
         ValdrNgService
     ],
-    declarations: [
-        ValdrErrorComponent
-    ],
     imports: [
         CommonModule
-    ],
-    exports: [
-        ValdrErrorComponent
     ]
 })
 export class ValdrNgModule { }

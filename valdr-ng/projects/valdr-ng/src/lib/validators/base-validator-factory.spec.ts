@@ -1,5 +1,5 @@
-import {BaseValidatorFactory} from "./base-validator-factory";
-import {ValdrValidationFn} from "../model";
+import {BaseValidatorFactory} from './base-validator-factory';
+import {ValdrValidationFn} from '../model';
 
 describe('BaseValidatorFactory', () => {
   let validatorHandler: BaseValidatorFactory | null = null;

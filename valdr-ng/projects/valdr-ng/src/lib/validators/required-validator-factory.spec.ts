@@ -1,6 +1,6 @@
-import {RequiredValidatorFactory} from "./required-validator-factory";
-import {FormControl} from "@angular/forms";
-import {ValdrValidationFn} from "../model";
+import {RequiredValidatorFactory} from './required-validator-factory';
+import {FormControl} from '@angular/forms';
+import {ValdrValidationFn} from '../model';
 
 describe('RequiredValidatorHandler', () => {
   let requiredValidatorHandler: RequiredValidatorFactory | null;

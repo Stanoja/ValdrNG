@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors} from "@angular/forms";
+import {AbstractControl, ValidationErrors} from '@angular/forms';
 
 export interface BaseValidator {
     [validator: string]: {
@@ -17,12 +17,8 @@ interface RequiredValidator {
     required: BaseValidator;
 }
 
-export interface ValdrFieldConstraints {
-    size?: SizeValidator;
-}
-
 export interface ValdrModelConstraints {
-    [field: string]: ValdrModelConstraints | BaseValidator | SizeValidator | RequiredValidator;
+    [field: string]: BaseValidator | SizeValidator | RequiredValidator;
 }
 
 export interface ValdrConstraints {

@@ -1,4 +1,4 @@
-import {ValdrValidationFn} from "../model";
+import {ValdrValidationFn} from '../model';
 
 /**
  * Base validator factory. Used to create validator for the given config and checks whether the validator created

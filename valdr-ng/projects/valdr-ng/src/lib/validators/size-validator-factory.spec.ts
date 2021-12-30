@@ -1,6 +1,6 @@
-import {SizeValidatorFactory} from "./size-validator-factory";
-import {ValdrValidationFn} from "../model";
-import {FormControl} from "@angular/forms";
+import {SizeValidatorFactory} from './size-validator-factory';
+import {ValdrValidationFn} from '../model';
+import {FormControl} from '@angular/forms';
 
 describe('SizeValidatorFactory', () => {
   let sizeValidatorHandler: SizeValidatorFactory | null;

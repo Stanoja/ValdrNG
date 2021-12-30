@@ -1,6 +1,6 @@
-import {BaseValidatorFactory} from "./base-validator-factory";
-import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
-import {ValdrValidationFn} from "../model";
+import {BaseValidatorFactory} from './base-validator-factory';
+import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {ValdrValidationFn} from '../model';
 
 /**
  * Handles {@link Validators.minLength} and {@link Validators.maxLength}.

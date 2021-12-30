@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValdrConstraints} from "../../../valdr-ng/src/lib/model";
-import {ValdrNgService} from "../../../valdr-ng/src/lib/valdr-ng.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ValdrConstraints} from '../../../valdr-ng/src/lib/model';
+import {ValdrNgService} from '../../../valdr-ng/src/lib/valdr-ng.service';
 
 @Component({
   selector: 'app-root',
