@@ -6,6 +6,7 @@ import {ValdrValidationFn} from '../model';
  * Handles {@link Validators.minLength} and {@link Validators.maxLength}.
  */
 export class SizeValidatorFactory extends BaseValidatorFactory {
+
   canHandle(config: any): boolean {
     if (!config) {
       return false;

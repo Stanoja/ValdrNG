@@ -25,12 +25,19 @@ export class AppComponent implements OnInit {
           'max': 20,
           'message': 'First name must be between 2 and 20 characters.'
         }
+      },
+      'username': {
+        'pattern': {
+          'value': '[a-zA-Z]{4,}',
+          'message': 'Usename must be longer than 4 characters and match \'a-zA-Z\'.'
+        }
       }
     }
   };
 
   private person = {
-    firstName: 'John'
+    firstName: 'John',
+    username: ''
   };
 
   constructor(private valdrService: ValdrNgService,
@@ -40,14 +47,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.personForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]]
+      firstName: [this.person.firstName, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      username: [this.person.username, Validators.pattern('[a-zA-Z]{4,}')]
     });
     const controls = this.valdrService.createFormGroupControls(this.person, 'Person');
     this.personFormWithValdr = this.fb.group(controls);
   }
 
   isFirstNameInvalidInLength() {
-    return this.personForm.touched &&  this.firstNameControl?.errors ? this.firstNameControl.errors['minlength']
+    return this.personForm.touched && this.firstNameControl?.errors ? this.firstNameControl.errors['minlength']
       || this.firstNameControl.errors['maxlength'] : false;
   }
 
@@ -55,7 +63,15 @@ export class AppComponent implements OnInit {
     return this.personForm.touched && this.firstNameControl?.errors ? this.firstNameControl.errors['required'] : false;
   }
 
+  isUsernameInvalid() {
+    return this.personForm.touched && this.usernameControl?.errors ? this.usernameControl.errors['pattern'] : false;
+  }
+
   get firstNameControl() {
     return this.personForm.get('firstName');
+  }
+
+  get usernameControl() {
+    return this.personForm.get('username');
   }
 }

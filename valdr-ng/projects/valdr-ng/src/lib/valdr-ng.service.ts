@@ -3,6 +3,7 @@ import {ValdrConstraints, ValdrValidationFn} from './model';
 import {RequiredValidatorFactory} from './validators/required-validator-factory';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
 import {SizeValidatorFactory} from './validators/size-validator-factory';
+import {PatternValidatorFactory} from './validators/pattern-validator-factory';
 
 /**
  * ValdrNG service.
@@ -16,7 +17,7 @@ export class ValdrNgService {
   private constraints: ValdrConstraints = {};
 
   constructor() {
-    this.validators.push(new RequiredValidatorFactory(), new SizeValidatorFactory());
+    this.validators.push(new RequiredValidatorFactory(), new SizeValidatorFactory(), new PatternValidatorFactory());
   }
 
   /**

@@ -14,14 +14,14 @@ export class RequiredValidatorFactory extends BaseValidatorFactory {
   createValidator(config: any): ValdrValidationFn[] {
     function required(control: AbstractControl): ValidationErrors | null {
       const result = Validators.required(control);
-      if (result) {
-        return {
-          required: {
-            message: config['required'].message
-          }
+      if (result === null) {
+        return null;
+      }
+      return {
+        required: {
+          message: config['required'].message
         }
       }
-      return result;
     }
     return [required];
   }
