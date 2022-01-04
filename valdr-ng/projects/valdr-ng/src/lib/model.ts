@@ -6,6 +6,10 @@ export interface BaseValidator {
   }
 }
 
+export interface EmailValidator {
+  email: BaseValidator;
+}
+
 interface PatternValidator {
   pattern: BaseValidator & {
     value: string | RegExp;
@@ -24,7 +28,7 @@ interface RequiredValidator {
 }
 
 export interface ValdrModelConstraints {
-  [field: string]: BaseValidator | PatternValidator | SizeValidator | RequiredValidator;
+  [field: string]: BaseValidator | EmailValidator | PatternValidator | SizeValidator | RequiredValidator;
 }
 
 export interface ValdrConstraints {

@@ -31,13 +31,19 @@ export class AppComponent implements OnInit {
           'value': '[a-zA-Z]{4,}',
           'message': 'Usename must be longer than 4 characters and match \'a-zA-Z\'.'
         }
+      },
+      'email': {
+        'email': {
+          'message': 'Invalid email.'
+        }
       }
     }
   };
 
   private person = {
     firstName: 'John',
-    username: ''
+    username: '',
+    email: ''
   };
 
   constructor(private valdrService: ValdrNgService,
@@ -48,7 +54,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.personForm = this.fb.group({
       firstName: [this.person.firstName, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      username: [this.person.username, Validators.pattern('[a-zA-Z]{4,}')]
+      username: [this.person.username, Validators.pattern('[a-zA-Z]{4,}')],
+      email: [this.person.email, Validators.email]
     });
     const controls = this.valdrService.createFormGroupControls(this.person, 'Person');
     this.personFormWithValdr = this.fb.group(controls);
@@ -67,11 +74,19 @@ export class AppComponent implements OnInit {
     return this.personForm.touched && this.usernameControl?.errors ? this.usernameControl.errors['pattern'] : false;
   }
 
-  get firstNameControl() {
+  isEmailInvalid() {
+    return this.personForm.touched && this.emailControl?.errors ? this.emailControl.errors['email'] : false;
+  }
+
+  private get firstNameControl() {
     return this.personForm.get('firstName');
   }
 
-  get usernameControl() {
+  private get usernameControl() {
     return this.personForm.get('username');
+  }
+
+  private get emailControl() {
+    return this.personForm.get('email');
   }
 }

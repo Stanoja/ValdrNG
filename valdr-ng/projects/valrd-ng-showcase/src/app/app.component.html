@@ -11,14 +11,22 @@
         <p *ngIf="isFirstNameInvalidInRequired()">
           First name is required.
         </p>
+        <br>
         <label>Username:</label>
         <input formControlName="username">
         <p *ngIf="isUsernameInvalid()">
-          Usename must be longer than 4 characters and match 'a-zA-Z'.
+          Username must be longer than 4 characters and match 'a-zA-Z'.
+        </p>
+        <br>
+        <label>E-mail:</label>
+        <input formControlName="email">
+        <p *ngIf="isEmailInvalid()">
+          Email is invalid.
         </p>
       </div>
     </form>
   </div>
+  <br>
   <div>
     <p>Main form with ValdrNG:</p>
     <form [formGroup]="personFormWithValdr">
@@ -26,10 +34,15 @@
       <input formControlName="firstName">
       <vng-valdr-error [control]="this.personFormWithValdr.get('firstName')">
       </vng-valdr-error>
+      <br>
       <label>Username:</label>
       <input formControlName="username">
       <vng-valdr-error [control]="this.personFormWithValdr.get('username')">
       </vng-valdr-error>
+      <br>
+      <label>E-mail:</label>
+      <input formControlName="email">
+      <vng-valdr-error [control]="this.personFormWithValdr.get('email')"></vng-valdr-error>
     </form>
   </div>
 </div>
