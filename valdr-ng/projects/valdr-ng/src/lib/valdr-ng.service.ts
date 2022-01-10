@@ -5,6 +5,8 @@ import {BaseValidatorFactory} from './validators/base-validator-factory';
 import {SizeValidatorFactory} from './validators/size-validator-factory';
 import {PatternValidatorFactory} from './validators/pattern-validator-factory';
 import {EmailValidatorFactory} from './validators/email-validator-factory';
+import {DecimalMaxFactory} from "./validators/decimal-max-factory";
+import {DecimalMinFactory} from "./validators/decimal-min-factory";
 
 /**
  * ValdrNG service.
@@ -14,13 +16,9 @@ import {EmailValidatorFactory} from './validators/email-validator-factory';
 })
 export class ValdrNgService {
 
-  private validators: BaseValidatorFactory[] = []
+  private validators: BaseValidatorFactory[] = [new RequiredValidatorFactory(), new SizeValidatorFactory(),
+    new PatternValidatorFactory(), new EmailValidatorFactory(), new DecimalMaxFactory(), new DecimalMinFactory()]
   private constraints: ValdrConstraints = {};
-
-  constructor() {
-    this.validators.push(new RequiredValidatorFactory(), new SizeValidatorFactory(), new PatternValidatorFactory(),
-      new EmailValidatorFactory());
-  }
 
   /**
    * Sets the constraints to the service.

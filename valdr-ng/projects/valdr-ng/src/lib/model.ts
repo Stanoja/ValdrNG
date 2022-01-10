@@ -6,6 +6,19 @@ export interface BaseValidator {
   }
 }
 
+interface DecimalValidator {
+  inclusive: boolean;
+  value: string | number;
+}
+
+export interface DecimalMaxValidator {
+  ['javax.validation.constraints.DecimalMax']: BaseValidator & DecimalValidator
+}
+
+export interface DecimalMinValidator {
+  ['javax.validation.constraints.DecimalMin']: BaseValidator & DecimalValidator
+}
+
 export interface EmailValidator {
   email: BaseValidator;
 }
@@ -28,7 +41,8 @@ interface RequiredValidator {
 }
 
 export interface ValdrModelConstraints {
-  [field: string]: BaseValidator | EmailValidator | PatternValidator | SizeValidator | RequiredValidator;
+  [field: string]: BaseValidator | EmailValidator | PatternValidator | SizeValidator | RequiredValidator |
+    DecimalMaxValidator | DecimalMinValidator;
 }
 
 export interface ValdrConstraints {

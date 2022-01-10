@@ -23,26 +23,39 @@
         <p *ngIf="isEmailInvalid()">
           Email is invalid.
         </p>
+        <br>
+        <label>Age:</label>
+        <input formControlName="age" type="number">
+        <p *ngIf="isMaxAgeInvalid()">
+          Age should be greater or equal to 10.
+        </p>
+        <p *ngIf="isMinAgeInvalid()">
+          Age should be less than or equal to 100.
+        </p>
       </div>
     </form>
   </div>
   <br>
   <div>
     <p>Main form with ValdrNG:</p>
-    <form [formGroup]="personFormWithValdr">
+    <form [formGroup]="personFormWithValdrNg">
       <label>First name:</label>
       <input formControlName="firstName">
-      <vng-valdr-error [control]="this.personFormWithValdr.get('firstName')">
+      <vng-valdr-error [control]="this.personFormWithValdrNg.get('firstName')">
       </vng-valdr-error>
       <br>
       <label>Username:</label>
       <input formControlName="username">
-      <vng-valdr-error [control]="this.personFormWithValdr.get('username')">
+      <vng-valdr-error [control]="this.personFormWithValdrNg.get('username')">
       </vng-valdr-error>
       <br>
       <label>E-mail:</label>
       <input formControlName="email">
-      <vng-valdr-error [control]="this.personFormWithValdr.get('email')"></vng-valdr-error>
+      <vng-valdr-error [control]="this.personFormWithValdrNg.get('email')"></vng-valdr-error>
+      <br>
+      <label>Age:</label>
+      <input formControlName="age" type="number">
+      <vng-valdr-error [control]="this.personFormWithValdrNg.get('age')"></vng-valdr-error>
     </form>
   </div>
 </div>
