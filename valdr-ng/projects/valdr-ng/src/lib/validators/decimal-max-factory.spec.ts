@@ -15,7 +15,7 @@ describe('DecimalMaxFactory', () => {
     expect(decimalMaxFactory?.canHandle(null)).toBeFalse();
     expect(decimalMaxFactory?.canHandle({})).toBeFalse();
     expect(decimalMaxFactory?.canHandle({
-      'javax.validation.constraints.DecimalMax': {
+      max: {
         value: 10,
         message: 'Should be less than 10.'
       }
@@ -26,7 +26,7 @@ describe('DecimalMaxFactory', () => {
     it('should create the validator', () => {
       // given / when / then
       expect(decimalMaxFactory?.createValidator({
-        'javax.validation.constraints.DecimalMax': {
+        max: {
           value: 10,
           message: 'Should be less than 10.'
         }
@@ -38,7 +38,7 @@ describe('DecimalMaxFactory', () => {
 
       beforeEach(() => {
         validator = decimalMaxFactory!.createValidator({
-          'javax.validation.constraints.DecimalMax': {
+          max: {
             value: 10,
             message: 'Should be less than 10.'
           }
@@ -67,7 +67,7 @@ describe('DecimalMaxFactory', () => {
 
         // then
         expect(result).toEqual(jasmine.objectContaining({
-          'javax.validation.constraints.DecimalMax': {
+          max: {
             value: 10,
             message: 'Should be less than 10.'
           }
@@ -80,7 +80,7 @@ describe('DecimalMaxFactory', () => {
 
       beforeEach(() => {
         validator = decimalMaxFactory!.createValidator({
-          'javax.validation.constraints.DecimalMax': {
+          max: {
             value: 20,
             message: 'Should be less than 20.',
             inclusive: false
@@ -110,7 +110,7 @@ describe('DecimalMaxFactory', () => {
 
         // then
         expect(result).toEqual(jasmine.objectContaining({
-          'javax.validation.constraints.DecimalMax': {
+          max: {
             value: 20,
             message: 'Should be less than 20.'
           }

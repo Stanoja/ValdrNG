@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component} from '@angular/core';
 import {ValdrConstraints} from '../../../valdr-ng/src/lib/model';
 import {ValdrNgService} from '../../../valdr-ng/src/lib/valdr-ng.service';
 
@@ -8,11 +7,8 @@ import {ValdrNgService} from '../../../valdr-ng/src/lib/valdr-ng.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'valdr-ng-showcase';
-
-  personForm!: FormGroup;
-  personFormWithValdrNg!: FormGroup;
 
   private constraints: ValdrConstraints = {
     'Person': {
@@ -47,71 +43,36 @@ export class AppComponent implements OnInit {
           'value': 100,
           'message': 'Age should be less than or equal to 100.'
         },
+      },
+      'homepage': {
+        'url': {
+          'message': 'Invalid URL.'
+        }
+      },
+      'addressLine1': {
+        'minLength': {
+          'number': 2,
+          'message': 'Address should be longer than 2 characters.'
+        },
+        'maxLength': {
+          'number': 20,
+          'message': 'Address should be shorter than 20 characters.'
+        }
       }
     }
   };
 
-  private person = {
+  person = {
     firstName: 'John',
     username: '',
     email: '',
-    age: null
+    age: null,
+    homepage: null,
+    addressLine1: 'My Address'
   };
 
-  constructor(private valdrNgService: ValdrNgService,
-              private fb: FormBuilder) {
+  constructor(private valdrNgService: ValdrNgService) {
     valdrNgService.setConstraints(this.constraints);
   }
 
-  ngOnInit(): void {
-    this.personForm = this.fb.group({
-      firstName: [this.person.firstName, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      username: [this.person.username, Validators.pattern('[a-zA-Z]{4,}')],
-      email: [this.person.email, Validators.email],
-      age: [this.person.age, [Validators.min(10), Validators.max(100)]]
-    });
-    const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');
-    this.personFormWithValdrNg = this.fb.group(controls);
-  }
-
-  isFirstNameInvalidInLength() {
-    return this.personForm.touched && this.firstNameControl?.errors ? this.firstNameControl.errors['minlength']
-      || this.firstNameControl.errors['maxlength'] : false;
-  }
-
-  isFirstNameInvalidInRequired() {
-    return this.personForm.touched && this.firstNameControl?.errors ? this.firstNameControl.errors['required'] : false;
-  }
-
-  isUsernameInvalid() {
-    return this.personForm.touched && this.usernameControl?.errors ? this.usernameControl.errors['pattern'] : false;
-  }
-
-  isEmailInvalid() {
-    return this.personForm.touched && this.emailControl?.errors ? this.emailControl.errors['email'] : false;
-  }
-
-  isMaxAgeInvalid() {
-    return this.personForm.touched && this.ageControl?.errors ? this.ageControl.errors['max'] : false;
-  }
-
-  isMinAgeInvalid() {
-    return this.personForm.touched && this.ageControl?.errors ? this.ageControl.errors['min'] : false;
-  }
-
-  private get firstNameControl() {
-    return this.personForm.get('firstName');
-  }
-
-  private get usernameControl() {
-    return this.personForm.get('username');
-  }
-
-  private get emailControl() {
-    return this.personForm.get('email');
-  }
-
-  private get ageControl() {
-    return this.personForm.get('age');
-  }
 }

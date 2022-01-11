@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {AbstractControl} from "@angular/forms";
 
 @Component({
-  selector: 'vng-valdr-error',
+  selector: 'app-valdr-error',
   templateUrl: './valdr-error.component.html',
   styleUrls: ['./valdr-error.component.scss']
 })

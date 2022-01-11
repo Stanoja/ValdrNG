@@ -1,6 +1,6 @@
 import {BaseValidatorFactory} from './base-validator-factory';
 import {ValdrValidationFn} from '../model';
-import {AbstractControl, ValidationErrors, Validators} from "@angular/forms";
+import {AbstractControl, ValidationErrors, Validators} from '@angular/forms';
 
 /**
  * Handler for {@link Validators.email}.

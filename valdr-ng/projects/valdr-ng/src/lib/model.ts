@@ -12,11 +12,23 @@ interface DecimalValidator {
 }
 
 export interface DecimalMaxValidator {
-  ['javax.validation.constraints.DecimalMax']: BaseValidator & DecimalValidator
+  max: BaseValidator & DecimalValidator;
 }
 
 export interface DecimalMinValidator {
-  ['javax.validation.constraints.DecimalMin']: BaseValidator & DecimalValidator
+  min: BaseValidator & DecimalValidator;
+}
+
+interface BaseLengthValidator {
+  number: number;
+}
+
+export interface MaxLengthValidator {
+  maxLength: BaseValidator & BaseLengthValidator;
+}
+
+export interface MinLengthValidator {
+  minLength: BaseValidator & BaseLengthValidator;
 }
 
 export interface EmailValidator {
@@ -36,13 +48,17 @@ interface SizeValidator {
   }
 }
 
+interface UrlValidator {
+  url: BaseValidator;
+}
+
 interface RequiredValidator {
   required: BaseValidator;
 }
 
 export interface ValdrModelConstraints {
   [field: string]: BaseValidator | EmailValidator | PatternValidator | SizeValidator | RequiredValidator |
-    DecimalMaxValidator | DecimalMinValidator;
+    DecimalMaxValidator | DecimalMinValidator | MaxLengthValidator | MinLengthValidator | UrlValidator;
 }
 
 export interface ValdrConstraints {

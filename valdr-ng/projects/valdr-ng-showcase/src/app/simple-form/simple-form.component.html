@@ -1,0 +1,49 @@
+<form [formGroup]="personForm">
+  <div>
+    <label>First name:</label>
+    <input formControlName="firstName">
+    <p *ngIf="isFirstNameInvalidInLength()">
+      First name must be between 2 and 20 characters.
+    </p>
+    <p *ngIf="isFirstNameInvalidInRequired()">
+      First name is required.
+    </p>
+    <br>
+    <label>Username:</label>
+    <input formControlName="username">
+    <p *ngIf="isUsernameInvalid()">
+      Username must be longer than 4 characters and match 'a-zA-Z'.
+    </p>
+    <br>
+    <label>E-mail:</label>
+    <input formControlName="email">
+    <p *ngIf="isEmailInvalid()">
+      Email is invalid.
+    </p>
+    <br>
+    <label>Age:</label>
+    <input formControlName="age" type="number">
+    <p *ngIf="isMaxAgeInvalid()">
+      Age should be greater or equal to 10.
+    </p>
+    <p *ngIf="isMinAgeInvalid()">
+      Age should be less than or equal to 100.
+    </p>
+    <br>
+    <label>Homepage:</label>
+    <input formControlName="homepage" type="url">
+    <p *ngIf="isHomepageInvalid()">
+      Invalid URL.
+    </p>
+    <br>
+    <label>Address line 1:</label>
+    <input formControlName="addressLine1">
+    <p *ngIf="isAddressLine1InvalidInMaxLength()">
+      Address line should be shorter than 20 characters.
+    </p>
+    <p *ngIf="isAddressLine1InvalidInMinLength()">
+      Address line should be longer than 2 characters.
+    </p>
+  </div>
+</form>
+

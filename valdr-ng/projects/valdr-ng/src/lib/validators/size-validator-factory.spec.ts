@@ -99,7 +99,7 @@ describe('SizeValidatorFactory', () => {
         expect(result).toBeNull();
       });
 
-      it('should add message on invalid min', () => {
+      it('should fallback to 0 if min is not specified', () => {
         // given
         const control = new FormControl();
         control.setValue('Longer than 10');
@@ -108,9 +108,7 @@ describe('SizeValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          maxlength: jasmine.objectContaining({message: 'This field should be shorter than 10.'})
-        }));
+        expect(result).toBeNull();
       });
     });
   });

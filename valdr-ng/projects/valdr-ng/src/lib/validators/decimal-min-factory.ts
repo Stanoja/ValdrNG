@@ -7,7 +7,7 @@ import {DecimalFactory} from './base-decimal-factory';
 export class DecimalMinFactory extends DecimalFactory {
 
   getField(): string {
-    return 'javax.validation.constraints.DecimalMin';
+    return 'min';
   }
 
   getMainValidator(value: number): ValidatorFn {

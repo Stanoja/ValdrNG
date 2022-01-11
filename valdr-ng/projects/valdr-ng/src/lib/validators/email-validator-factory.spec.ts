@@ -37,7 +37,7 @@ describe('EmailValidatorFactory', () => {
 
       afterAll(() => validator = null);
 
-      it('should not add message on valid pattern', () => {
+      it('should return null on valid email', () => {
         // given
         const control: FormControl = new FormControl('qqq@myemail.com');
 
@@ -48,7 +48,7 @@ describe('EmailValidatorFactory', () => {
         expect(result).toBeNull();
       });
 
-      it('should add message on invalid pattern', () => {
+      it('should return validation result on invalid email', () => {
         // given
         const control: FormControl = new FormControl('asd');
 

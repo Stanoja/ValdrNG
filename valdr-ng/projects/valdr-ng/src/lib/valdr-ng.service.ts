@@ -7,6 +7,9 @@ import {PatternValidatorFactory} from './validators/pattern-validator-factory';
 import {EmailValidatorFactory} from './validators/email-validator-factory';
 import {DecimalMaxFactory} from "./validators/decimal-max-factory";
 import {DecimalMinFactory} from "./validators/decimal-min-factory";
+import {MinLengthValidatorFactory} from './validators/min-length-validator-factory';
+import {MaxLengthValidatorFactory} from './validators/max-length-validator-factory';
+import {UrlValidatorFactory} from './validators/url-validator-factory';
 
 /**
  * ValdrNG service.
@@ -17,7 +20,8 @@ import {DecimalMinFactory} from "./validators/decimal-min-factory";
 export class ValdrNgService {
 
   private validators: BaseValidatorFactory[] = [new RequiredValidatorFactory(), new SizeValidatorFactory(),
-    new PatternValidatorFactory(), new EmailValidatorFactory(), new DecimalMaxFactory(), new DecimalMinFactory()]
+    new PatternValidatorFactory(), new EmailValidatorFactory(), new DecimalMaxFactory(), new DecimalMinFactory(),
+    new MaxLengthValidatorFactory(), new MinLengthValidatorFactory(), new UrlValidatorFactory()]
   private constraints: ValdrConstraints = {};
 
   /**

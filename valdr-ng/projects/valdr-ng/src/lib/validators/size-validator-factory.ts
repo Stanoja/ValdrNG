@@ -18,9 +18,7 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
   createValidator(config: any): ValdrValidationFn[] {
     const sizeConfig = config['size'];
     const validators = [];
-    if (sizeConfig.min !== undefined) {
-      validators.push(this.getMinLengthValidator(sizeConfig));
-    }
+    validators.push(this.getMinLengthValidator(sizeConfig));
     if (sizeConfig.max !== undefined) {
       validators.push(this.getMaxLengthValidator(sizeConfig));
     }
@@ -28,7 +26,7 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
   }
 
   private getMinLengthValidator(config: any) {
-    return this.getValidatorFn(config.message, 'minlength', Validators.minLength(config.min));
+    return this.getValidatorFn(config.message, 'minlength', Validators.minLength(config.min || 0));
   }
 
   private getMaxLengthValidator(config: any) {

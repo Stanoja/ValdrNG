@@ -15,7 +15,7 @@ describe('DecimalMinFactory', () => {
     expect(decimalMinFactory?.canHandle(null)).toBeFalse();
     expect(decimalMinFactory?.canHandle({})).toBeFalse();
     expect(decimalMinFactory?.canHandle({
-      'javax.validation.constraints.DecimalMin': {
+      min: {
         value: 10,
         message: 'Should be greater than 10.'
       }
@@ -26,7 +26,7 @@ describe('DecimalMinFactory', () => {
     it('should create the validator', () => {
       // given / when / then
       expect(decimalMinFactory?.createValidator({
-        'javax.validation.constraints.DecimalMin': {
+        min: {
           value: 10,
           message: 'Should be greater than 10.'
         }
@@ -38,7 +38,7 @@ describe('DecimalMinFactory', () => {
 
       beforeEach(() => {
         validator = decimalMinFactory!.createValidator({
-          'javax.validation.constraints.DecimalMin': {
+          min: {
             value: 10,
             message: 'Should be greater than 10.'
           }
@@ -67,7 +67,7 @@ describe('DecimalMinFactory', () => {
 
         // then
         expect(result).toEqual(jasmine.objectContaining({
-          'javax.validation.constraints.DecimalMin': {
+          min: {
             value: 10,
             message: 'Should be greater than 10.'
           }
@@ -80,7 +80,7 @@ describe('DecimalMinFactory', () => {
 
       beforeEach(() => {
         validator = decimalMinFactory!.createValidator({
-          'javax.validation.constraints.DecimalMin': {
+          min: {
             value: 20,
             message: 'Should be greater than 20.',
             inclusive: false
@@ -110,7 +110,7 @@ describe('DecimalMinFactory', () => {
 
         // then
         expect(result).toEqual(jasmine.objectContaining({
-          'javax.validation.constraints.DecimalMin': {
+          min: {
             value: 20,
             message: 'Should be greater than 20.'
           }

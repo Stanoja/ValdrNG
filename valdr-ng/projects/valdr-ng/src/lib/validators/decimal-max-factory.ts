@@ -7,7 +7,7 @@ import {DecimalFactory} from './base-decimal-factory';
 export class DecimalMaxFactory extends DecimalFactory {
 
   getField(): string {
-    return 'javax.validation.constraints.DecimalMax';
+    return 'max';
   }
 
   getMainValidator(value: number): ValidatorFn {

@@ -18,7 +18,7 @@ export abstract class BaseValidatorFactory {
    * Factory method to create a validator for the given config, if the validator can handle it {@see canHandle}.
    *
    * @param config: any
-   * @return valrd validation functions
+   * @return valdr validation functions
    */
   abstract createValidator(config: any): ValdrValidationFn[];
 }
