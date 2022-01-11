@@ -2,6 +2,9 @@ import {BaseValidatorFactory} from './base-validator-factory';
 import {ValdrValidationFn} from '../model';
 import {AbstractControl, ValidationErrors} from '@angular/forms';
 
+/**
+ * Handles URL validation.
+ */
 export class UrlValidatorFactory extends BaseValidatorFactory {
   private readonly urlRegex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@\-\/]))?$/;
 

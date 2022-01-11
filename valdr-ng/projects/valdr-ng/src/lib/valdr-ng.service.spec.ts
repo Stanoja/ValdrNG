@@ -38,28 +38,6 @@ describe('ValdrNgService', () => {
     expect((service as any).constraints).toBe(constraints);
   });
 
-  it('should add validators', () => {
-    // given
-    const model = {
-      addressLine1: 'Address Line.'
-    }
-    const constraint = {
-      'Address': {
-        'addressLine1': {
-          'required': {
-            'message': 'Address line is required.'
-          }
-        }
-      }
-    };
-
-    // when
-    service.addConstraints(constraint);
-
-    // then
-    expect(service.createFormGroupControls(model, 'Address')).toBeDefined();
-  });
-
   it('it should add valdr validators', () => {
     // given
     const validator: BaseValidatorFactory = {

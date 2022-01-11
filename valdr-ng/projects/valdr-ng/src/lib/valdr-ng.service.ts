@@ -12,7 +12,17 @@ import {MaxLengthValidatorFactory} from './validators/max-length-validator-facto
 import {UrlValidatorFactory} from './validators/url-validator-factory';
 
 /**
- * ValdrNG service.
+ * Main ValdrNG service.
+ * It keeps all the existing validators and offers the possibility to register more.
+ * <br>
+ * Usage:
+ * <ol>
+ *   <li>Register constraints with {@link ValdrNgService.setConstraints}</li>
+ *   <li>(Optional) Add custom validators with {@link ValdrNgService.addValidators}</li>
+ *   <li>Create the form group controls with {@link ValdrNgService.createFormGroupControls}</li>
+ * </ol>
+ *
+ * For example see valdr-ng-showcase app.
  */
 @Injectable({
   providedIn: 'root'
@@ -34,15 +44,6 @@ export class ValdrNgService {
   }
 
   /**
-   * Adds the constraints to the already existing ones.
-   *
-   * @param constraints
-   */
-  addConstraints(constraints: ValdrConstraints) {
-    Object.assign(this.constraints, constraints);
-  }
-
-  /**
    * Add additional valdr validator handlers which extend {@link BaseValidatorFactory}.
    *
    * @param valdrValidatorHandlers the valdr validators
@@ -53,7 +54,7 @@ export class ValdrNgService {
 
   /**
    * Create form group controls for the given model. The control and validators are taken from the constraints
-   * ({@see setConstraints}, {@see addConstraints}).
+   * ({@see setConstraints}).
    *
    * @param model the model
    * @param modelName the model name

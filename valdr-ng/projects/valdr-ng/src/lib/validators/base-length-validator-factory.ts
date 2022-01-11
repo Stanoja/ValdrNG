@@ -2,6 +2,9 @@ import {BaseValidatorFactory} from './base-validator-factory';
 import {ValdrValidationFn} from '../model';
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
+/**
+ * Base length validator factory.
+ */
 export abstract class BaseLengthValidatorFactory extends BaseValidatorFactory {
   canHandle(config: any): boolean {
     return !!config && !!config['minLength'] && !!config['minLength'].number;
