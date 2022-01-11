@@ -38,12 +38,12 @@ export class AppComponent implements OnInit {
         }
       },
       'age': {
-        'javax.validation.constraints.DecimalMin': {
+        'min': {
           'value': 10,
           'inclusive': true,
           'message': 'Age should be greater or equal to 10.'
         },
-        'javax.validation.constraints.DecimalMax': {
+        'max': {
           'value': 100,
           'message': 'Age should be less than or equal to 100.'
         },

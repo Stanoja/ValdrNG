@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/valrd-ng-showcase'),
+      dir: require('path').join(__dirname, '../../coverage/valdr-ng-showcase'),
       subdir: '.',
       reporters: [
         { type: 'html' },
