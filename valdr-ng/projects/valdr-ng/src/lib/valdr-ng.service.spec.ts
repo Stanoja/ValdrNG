@@ -3,12 +3,19 @@ import {ValdrNgService} from './valdr-ng.service';
 import {ValidatorFn} from '@angular/forms';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
 import {ValdrValidationFn} from './model';
+import {SizeValidatorFactory} from './validators/size-validator-factory';
+import {RequiredValidatorFactory} from './validators/required-validator-factory';
 
 describe('ValdrNgService', () => {
   let service: ValdrNgService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        {provide: BaseValidatorFactory, useClass: SizeValidatorFactory, multi: true},
+        {provide: BaseValidatorFactory, useClass: RequiredValidatorFactory, multi: true},
+      ]
+    });
     service = TestBed.inject(ValdrNgService);
   });
 
@@ -53,7 +60,7 @@ describe('ValdrNgService', () => {
     service.addValidators([validator]);
 
     // then
-    expect((service as any).validators).toContain(validator);
+    expect((service as any).validatorsPerField['testConstraint']).toBe(validator);
   });
 
   describe('createValidators', () => {
