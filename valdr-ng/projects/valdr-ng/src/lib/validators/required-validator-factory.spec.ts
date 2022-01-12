@@ -9,25 +9,23 @@ describe('RequiredValidatorHandler', () => {
 
   afterAll(() => requiredValidatorHandler = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(requiredValidatorHandler?.canHandle(null)).toBeFalse();
-    expect(requiredValidatorHandler?.canHandle({})).toBeFalse();
-    expect(requiredValidatorHandler?.canHandle({required: {}})).toBeTrue();
+    expect(requiredValidatorHandler?.getConstraintName()).toEqual('required');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(requiredValidatorHandler?.createValidator({required: {message: 'This field is required.'}}))
-        .toBeTruthy();
+      expect(requiredValidatorHandler?.createValidator({message: 'This field is required.'}))
+        .toBeDefined();
     });
 
     describe('should validate properly', () => {
       let validator: ValdrValidationFn | null = {} as any;
 
       beforeEach(() => {
-        validator = requiredValidatorHandler!.createValidator({required: {message: 'This field is required.'}})[0];
+        validator = requiredValidatorHandler!.createValidator({message: 'This field is required.'})[0];
       });
 
       afterAll(() => validator = null);

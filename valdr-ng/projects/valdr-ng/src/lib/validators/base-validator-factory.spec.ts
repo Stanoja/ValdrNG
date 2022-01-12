@@ -9,8 +9,8 @@ describe('BaseValidatorFactory', () => {
       createValidator(): ValdrValidationFn[] {
         return [() => null];
       },
-      canHandle(config: any): boolean {
-        return !!config;
+      getConstraintName(): string {
+        return 'constraintName';
       }
     }) as BaseValidatorFactory;
   });
@@ -19,12 +19,11 @@ describe('BaseValidatorFactory', () => {
 
   it('should create validator', () => {
     // given / when / then
-    expect(validatorHandler?.createValidator).toBeTruthy();
+    expect(validatorHandler?.createValidator).toBeDefined();
   });
 
-  it('should handle config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(validatorHandler?.canHandle(null)).toBeFalse();
-    expect(validatorHandler?.canHandle({})).toBeTrue();
+    expect(validatorHandler?.getConstraintName()).toEqual('constraintName');
   });
 });

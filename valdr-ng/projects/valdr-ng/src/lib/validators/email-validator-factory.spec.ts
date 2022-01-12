@@ -10,29 +10,23 @@ describe('EmailValidatorFactory', () => {
 
   afterAll(() => emailValidatorFactory = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(emailValidatorFactory?.canHandle(null)).toBeFalse();
-    expect(emailValidatorFactory?.canHandle({})).toBeFalse();
-    expect(emailValidatorFactory?.canHandle({email: {message: 'Should be valid email.'}})).toBeTrue();
+    expect(emailValidatorFactory?.getConstraintName()).toEqual('email');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(emailValidatorFactory?.createValidator({email: {message: 'Should be valid email.'}}))
-        .toBeTruthy();
+      expect(emailValidatorFactory?.createValidator({message: 'Should be valid email.'}))
+        .toBeDefined();
     });
 
     describe('should validate properly', () => {
       let validator: ValdrValidationFn | null = {} as any;
 
       beforeEach(() => {
-        validator = emailValidatorFactory!.createValidator({
-          email: {
-            message: 'Should be valid email.'
-          }
-        })[0];
+        validator = emailValidatorFactory!.createValidator({message: 'Should be valid email.'})[0];
       });
 
       afterAll(() => validator = null);

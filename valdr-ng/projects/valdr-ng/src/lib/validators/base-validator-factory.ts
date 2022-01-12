@@ -7,12 +7,11 @@ import {ValdrValidationFn} from '../model';
 export abstract class BaseValidatorFactory {
 
   /**
-   * Check whether this handler can handle (is for the given) config.
+   * Returns the field which the current validator factory can handle.
    *
-   * @param config
    * @return can handle the given config
    */
-  abstract canHandle(config: any): boolean;
+  abstract getConstraintName(): string;
 
   /**
    * Factory method to create a validator for the given config, if the validator can handle it {@see canHandle}.

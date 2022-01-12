@@ -1,28 +1,25 @@
 import {BaseValidatorFactory} from './base-validator-factory';
 import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {ValdrValidationFn} from '../model';
+import {Injectable} from '@angular/core';
 
 /**
  * Handles {@link Validators.minLength} and {@link Validators.maxLength}.
  */
+@Injectable()
 export class SizeValidatorFactory extends BaseValidatorFactory {
-
-  canHandle(config: any): boolean {
-    if (!config) {
-      return false;
-    }
-    const sizeConfig = config['size'];
-    return !!sizeConfig && (sizeConfig.min !== undefined || sizeConfig.max !== undefined);
+  getConstraintName(): string {
+    return 'size';
   }
 
   createValidator(config: any): ValdrValidationFn[] {
-    const sizeConfig = config['size'];
-    const validators = [];
-    validators.push(this.getMinLengthValidator(sizeConfig));
-    if (sizeConfig.max !== undefined) {
-      validators.push(this.getMaxLengthValidator(sizeConfig));
+    if (config.max !== undefined) {
+      return [
+        this.getMinLengthValidator(config),
+        this.getMaxLengthValidator(config)
+      ];
     }
-    return validators;
+    return [this.getMinLengthValidator(config)];
   }
 
   private getMinLengthValidator(config: any) {

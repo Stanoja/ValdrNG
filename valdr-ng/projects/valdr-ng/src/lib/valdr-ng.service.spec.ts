@@ -44,8 +44,8 @@ describe('ValdrNgService', () => {
       createValidator(): ValdrValidationFn[] {
         return [() => null];
       },
-      canHandle(): boolean {
-        return true;
+      getConstraintName(): string {
+        return 'testConstraint';
       }
     };
 
@@ -149,6 +149,20 @@ describe('ValdrNgService', () => {
 
       // then
       expect(validators).toHaveSize(3);
+    });
+
+
+    it('should warn if no validators are available for constraint', () => {
+      // given
+      (<any> service).validatorsPerField['required'] = null;
+      spyOn(console, 'warn').and.callThrough();
+
+      // when
+      const validators = service.getValidatorsForField('Person', 'firstName');
+
+      // then
+      expect(console.warn).toHaveBeenCalledOnceWith('No validator found for constraint \'required\'.')
+      expect(validators).toHaveSize(2);
     });
   });
 });

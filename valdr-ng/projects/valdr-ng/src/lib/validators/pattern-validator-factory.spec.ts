@@ -10,18 +10,16 @@ describe('PatternValidatorFactory', () => {
 
   afterAll(() => patternValidatorHandler = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(patternValidatorHandler?.canHandle(null)).toBeFalse();
-    expect(patternValidatorHandler?.canHandle({})).toBeFalse();
-    expect(patternValidatorHandler?.canHandle({pattern: {value: '[a-zA-Z ]*', message: 'Should match /d/.'}})).toBeTrue();
+    expect(patternValidatorHandler?.getConstraintName()).toEqual('pattern');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(patternValidatorHandler?.createValidator({pattern: {value: '[a-zA-Z ]*', message: 'Should match /d/.'}}))
-        .toBeTruthy();
+      expect(patternValidatorHandler?.createValidator({value: '[a-zA-Z ]*', message: 'Should match /d/.'}))
+        .toBeDefined();
     });
 
     describe('should validate properly', () => {
@@ -29,10 +27,8 @@ describe('PatternValidatorFactory', () => {
 
       beforeEach(() => {
         validator = patternValidatorHandler!.createValidator({
-          pattern: {
-            value: '[a-zA-Z ]*',
-            message: 'Should match \'[a-zA-Z ]*\'.'
-          }
+          value: '[a-zA-Z ]*',
+          message: 'Should match \'[a-zA-Z ]*\'.'
         })[0];
       });
 

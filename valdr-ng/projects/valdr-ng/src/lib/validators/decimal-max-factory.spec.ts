@@ -10,27 +10,18 @@ describe('DecimalMaxFactory', () => {
 
   afterAll(() => decimalMaxFactory = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(decimalMaxFactory?.canHandle(null)).toBeFalse();
-    expect(decimalMaxFactory?.canHandle({})).toBeFalse();
-    expect(decimalMaxFactory?.canHandle({
-      max: {
-        value: 10,
-        message: 'Should be less than 10.'
-      }
-    })).toBeTrue();
+    expect(decimalMaxFactory?.getConstraintName()).toEqual('max');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
       expect(decimalMaxFactory?.createValidator({
-        max: {
-          value: 10,
-          message: 'Should be less than 10.'
-        }
-      })).toBeTruthy();
+        value: 10,
+        message: 'Should be less than 10.'
+      })).toBeDefined();
     });
 
     describe('should validate inclusive properly', () => {
@@ -38,10 +29,8 @@ describe('DecimalMaxFactory', () => {
 
       beforeEach(() => {
         validator = decimalMaxFactory!.createValidator({
-          max: {
-            value: 10,
-            message: 'Should be less than 10.'
-          }
+          value: 10,
+          message: 'Should be less than 10.'
         })[0];
       });
 
@@ -80,11 +69,9 @@ describe('DecimalMaxFactory', () => {
 
       beforeEach(() => {
         validator = decimalMaxFactory!.createValidator({
-          max: {
-            value: 20,
-            message: 'Should be less than 20.',
-            inclusive: false
-          }
+          value: 20,
+          message: 'Should be less than 20.',
+          inclusive: false
         })[0];
       });
 

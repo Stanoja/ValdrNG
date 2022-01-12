@@ -7,28 +7,15 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
  */
 export abstract class DecimalFactory extends BaseValidatorFactory {
 
-  canHandle(config: any): boolean {
-    return !!config && !!config[this.getField()]
-      && !!config[this.getField()]['value']
-      && !!config[this.getField()]['message'];
-  }
-
   createValidator(config: any): ValdrValidationFn[] {
     const validationFn = (control: AbstractControl): ValidationErrors | null => {
-      if (!config[this.getField()].inclusive) {
-        return this.handleExclusive(control, config);
+      if (config.inclusive) {
+        return this.handleInclusive(config, control);
       }
-      return this.handleInclusive(config, control);
+      return this.handleExclusive(config, control);
     }
     return [validationFn];
   }
-
-  /**
-   * Gets the validation config field name.
-   *
-   * @return the field name
-   */
-  abstract getField(): string;
 
   /**
    * Checks if the numbers are exclusive.
@@ -46,28 +33,28 @@ export abstract class DecimalFactory extends BaseValidatorFactory {
    */
   abstract getMainValidator(value: number): ValidatorFn;
 
-  private handleExclusive(control: AbstractControl, config: any): ValidationErrors | null {
+  private handleExclusive(config: any, control: AbstractControl): ValidationErrors | null {
     if (!control.value || isNaN(control.value)) {
       return null;
     }
-    if (this.isExclusive(Number(control.value), config[this.getField()]['value'])) {
+    if (this.isExclusive(Number(control.value), config.value)) {
       return null
     }
     return this.getValidationErrors(config);
   }
 
   private handleInclusive(config: any, control: AbstractControl) {
-    if (!this.getMainValidator(config[this.getField()]['value'])(control)) {
+    if (!this.getMainValidator(config.value)(control)) {
       return null;
     }
     return this.getValidationErrors(config);
   }
 
-  private getValidationErrors(config: any) {
+  private getValidationErrors({value, message}: any) {
     return {
-      [this.getField()]: {
-        value: config[this.getField()]['value'],
-        message: config[this.getField()]['message']
+      [this.getConstraintName()]: {
+        value,
+        message
       }
     };
   }

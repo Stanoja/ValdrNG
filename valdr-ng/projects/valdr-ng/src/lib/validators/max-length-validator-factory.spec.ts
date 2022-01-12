@@ -10,23 +10,16 @@ describe('MaxLengthValidatorFactory', () => {
 
   afterAll(() => maxLengthValidatorHandler = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(maxLengthValidatorHandler?.canHandle(null)).toBeFalse();
-    expect(maxLengthValidatorHandler?.canHandle({})).toBeFalse();
-    expect(maxLengthValidatorHandler?.canHandle({
-      maxLength: {
-        number: 5,
-        message: 'Should be shorter than 5.'
-      }
-    })).toBeTrue();
+    expect(maxLengthValidatorHandler?.getConstraintName()).toEqual('maxLength');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(maxLengthValidatorHandler?.createValidator({maxLength: {number: 4, message: 'Should be shorter than 4.'}}))
-        .toBeTruthy();
+      expect(maxLengthValidatorHandler?.createValidator({number: 4, message: 'Should be shorter than 4.'}))
+        .toBeDefined();
     });
 
     describe('should validate properly', () => {
@@ -34,10 +27,8 @@ describe('MaxLengthValidatorFactory', () => {
 
       beforeEach(() => {
         validator = maxLengthValidatorHandler!.createValidator({
-          maxLength: {
-            number: 4,
-            message: 'Should be shorter than 4.'
-          }
+          number: 4,
+          message: 'Should be shorter than 4.'
         })[0];
       });
 

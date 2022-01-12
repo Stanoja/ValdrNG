@@ -1,12 +1,14 @@
 import {ValidatorFn, Validators} from '@angular/forms';
 import {DecimalFactory} from './base-decimal-factory';
+import {Injectable} from '@angular/core';
 
 /**
  * Handles {@link Validators.max} including exclusive case.
  */
+@Injectable()
 export class DecimalMaxFactory extends DecimalFactory {
 
-  getField(): string {
+  getConstraintName(): string {
     return 'max';
   }
 

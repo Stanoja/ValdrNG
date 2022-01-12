@@ -11,36 +11,22 @@ describe('MinLengthValidatorFactory', () => {
 
   afterAll(() => urlValidatorFactory = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(urlValidatorFactory?.canHandle(null)).toBeFalse();
-    expect(urlValidatorFactory?.canHandle({})).toBeFalse();
-    expect(urlValidatorFactory?.canHandle({
-      url: {
-        message: 'Should be a valid URL.'
-      }
-    })).toBeTrue();
+    expect(urlValidatorFactory?.getConstraintName()).toEqual('url');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(urlValidatorFactory?.createValidator({
-        url: {
-          message: 'Should be a valid URL.'
-        }
-      })).toBeTruthy();
+      expect(urlValidatorFactory?.createValidator({message: 'Should be a valid URL.'})).toBeDefined();
     });
 
     describe('should validate properly', () => {
       let validator: ValdrValidationFn | null = {} as any;
 
       beforeEach(() => {
-        validator = urlValidatorFactory!.createValidator({
-          url: {
-            message: 'Should be a valid URL.'
-          }
-        })[0];
+        validator = urlValidatorFactory!.createValidator({message: 'Should be a valid URL.'})[0];
       });
 
       afterAll(() => validator = null);

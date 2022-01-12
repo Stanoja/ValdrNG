@@ -10,23 +10,16 @@ describe('MinLengthValidatorFactory', () => {
 
   afterAll(() => minLengthValidatorHandler = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(minLengthValidatorHandler?.canHandle(null)).toBeFalse();
-    expect(minLengthValidatorHandler?.canHandle({})).toBeFalse();
-    expect(minLengthValidatorHandler?.canHandle({
-      minLength: {
-        number: 5,
-        message: 'Should be shorter than 5.'
-      }
-    })).toBeTrue();
+    expect(minLengthValidatorHandler?.getConstraintName()).toEqual('minLength');
   });
 
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(minLengthValidatorHandler?.createValidator({minLength: {number: 4, message: 'Should be longer than 4.'}}))
-        .toBeTruthy();
+      expect(minLengthValidatorHandler?.createValidator({number: 4, message: 'Should be longer than 4.'}))
+        .toBeDefined();
     });
 
     describe('should validate properly', () => {
@@ -34,10 +27,8 @@ describe('MinLengthValidatorFactory', () => {
 
       beforeEach(() => {
         validator = minLengthValidatorHandler!.createValidator({
-          minLength: {
-            number: 4,
-            message: 'Should be longer than 4.'
-          }
+          number: 4,
+          message: 'Should be longer than 4.'
         })[0];
       });
 

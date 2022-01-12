@@ -9,14 +9,9 @@ describe('SizeValidatorFactory', () => {
 
   afterAll(() => sizeValidatorHandler = null);
 
-  it('should handle the config', () => {
+  it('should get constraint name', () => {
     // given / when / then
-    expect(sizeValidatorHandler?.canHandle(null)).toBeFalse();
-    expect(sizeValidatorHandler?.canHandle({})).toBeFalse();
-    expect(sizeValidatorHandler?.canHandle({size: {}})).toBeFalse();
-    expect(sizeValidatorHandler?.canHandle({size: {min: 1}})).toBeTrue();
-    expect(sizeValidatorHandler?.canHandle({size: {max: 10}})).toBeTrue();
-    expect(sizeValidatorHandler?.canHandle({size: {min: 1, max: 10}})).toBeTrue();
+    expect(sizeValidatorHandler?.getConstraintName()).toEqual('size');
   });
 
   describe('createValidator', () => {
@@ -24,12 +19,10 @@ describe('SizeValidatorFactory', () => {
     it('should create the validator', () => {
       // given / when / then
       expect(sizeValidatorHandler?.createValidator({
-        size: {
-          min: 5,
-          max: 10,
-          message: 'This field should be between 5 and 10.'
-        }
-      })).toBeTruthy();
+        min: 5,
+        max: 10,
+        message: 'This field should be between 5 and 10.'
+      })).toBeDefined();
     });
 
     describe('should validate min properly', () => {
@@ -37,10 +30,8 @@ describe('SizeValidatorFactory', () => {
 
       beforeEach(() => {
         validator = sizeValidatorHandler!.createValidator({
-          size: {
-            min: 5,
-            message: 'This field should be longer than 5.'
-          }
+          min: 5,
+          message: 'This field should be longer than 5.'
         })[0];
       });
 
@@ -78,10 +69,8 @@ describe('SizeValidatorFactory', () => {
 
       beforeEach(() => {
         validator = sizeValidatorHandler!.createValidator({
-          size: {
-            max: 10,
-            message: 'This field should be shorter than 10.'
-          }
+          max: 10,
+          message: 'This field should be shorter than 10.'
         })[0];
       });
 
