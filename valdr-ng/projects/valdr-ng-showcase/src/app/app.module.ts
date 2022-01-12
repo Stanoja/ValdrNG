@@ -19,7 +19,7 @@ import {SimpleFormComponent} from './simple-form/simple-form.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    ValdrNgModule
+    ValdrNgModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

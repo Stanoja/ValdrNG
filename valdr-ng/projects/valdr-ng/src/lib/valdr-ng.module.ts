@@ -1,4 +1,4 @@
-import {NgModule, Type} from '@angular/core';
+import {ModuleWithProviders, NgModule, Type} from '@angular/core';
 import {ValdrNgService} from './valdr-ng.service';
 import {CommonModule} from '@angular/common';
 
@@ -39,4 +39,12 @@ function getFactoryProvider(clazz: Type<any>) {
   ]
 })
 export class ValdrNgModule {
+  static forRoot(factories: Type<BaseValidatorFactory>[]): ModuleWithProviders<ValdrNgModule> {
+    return {
+      ngModule: ValdrNgModule,
+      providers: [
+        factories.map(getFactoryProvider)
+      ]
+    };
+  }
 }

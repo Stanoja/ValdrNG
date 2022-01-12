@@ -1,37 +1,35 @@
 import {AbstractControl, ValidationErrors} from '@angular/forms';
 
 export interface BaseValidator {
-  [validator: string]: {
-    message: string;
-  }
+  message: string;
 }
 
-interface DecimalValidator {
-  inclusive: boolean;
+interface DecimalValidator extends BaseValidator{
+  inclusive?: boolean;
   value: string | number;
 }
 
-export interface DecimalMaxValidator {
-  max: BaseValidator & DecimalValidator;
+interface DecimalMaxValidator {
+  max: DecimalValidator;
 }
 
-export interface DecimalMinValidator {
-  min: BaseValidator & DecimalValidator;
+interface DecimalMinValidator {
+  min: DecimalValidator;
 }
 
 interface BaseLengthValidator {
   number: number;
 }
 
-export interface MaxLengthValidator {
+interface MaxLengthValidator {
   maxLength: BaseValidator & BaseLengthValidator;
 }
 
-export interface MinLengthValidator {
+interface MinLengthValidator {
   minLength: BaseValidator & BaseLengthValidator;
 }
 
-export interface EmailValidator {
+interface EmailValidator {
   email: BaseValidator;
 }
 
