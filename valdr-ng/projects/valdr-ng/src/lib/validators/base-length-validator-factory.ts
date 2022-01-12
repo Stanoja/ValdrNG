@@ -1,5 +1,5 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {ValdrValidationFn} from '../model';
+import {BaseLengthValidatorConfig, ValdrValidationFn} from '../model';
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 /**
@@ -7,7 +7,7 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
  */
 export abstract class BaseLengthValidatorFactory extends BaseValidatorFactory {
 
-  createValidator({number, message}: any): ValdrValidationFn[] {
+  createValidator({number, message}: BaseLengthValidatorConfig): ValdrValidationFn[] {
     const validatorFn = (control: AbstractControl): ValidationErrors | null => {
       if (!this.getMainValidator(number)(control)) {
         return null;

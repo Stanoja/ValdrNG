@@ -1,27 +1,27 @@
-<form [formGroup]="personFormWithValdrNg">
+<form [formGroup]="personForm">
   <label>First name:</label>
   <input formControlName="firstName">
-  <app-valdr-error [control]="this.personFormWithValdrNg.get('firstName')">
+  <app-valdr-error [control]="this.personForm.get('firstName')">
   </app-valdr-error>
   <br>
   <label>Username:</label>
   <input formControlName="username">
-  <app-valdr-error [control]="this.personFormWithValdrNg.get('username')">
+  <app-valdr-error [control]="this.personForm.get('username')">
   </app-valdr-error>
   <br>
   <label>E-mail:</label>
   <input formControlName="email">
-  <app-valdr-error [control]="this.personFormWithValdrNg.get('email')"></app-valdr-error>
+  <app-valdr-error [control]="this.personForm.get('email')"></app-valdr-error>
   <br>
   <label>Age:</label>
   <input formControlName="age" type="number">
-  <app-valdr-error [control]="this.personFormWithValdrNg.get('age')"></app-valdr-error>
+  <app-valdr-error [control]="this.personForm.get('age')"></app-valdr-error>
   <br>
   <label>Homepage: </label>
   <input formControlName="homepage">
-  <app-valdr-error [control]="this.personFormWithValdrNg.get('homepage')"></app-valdr-error>
+  <app-valdr-error [control]="this.personForm.get('homepage')"></app-valdr-error>
   <br>
   <label>Address line 1: </label>
   <input formControlName="addressLine1">
-  <app-valdr-error [control]="this.personFormWithValdrNg.get('addressLine1')"></app-valdr-error>
+  <app-valdr-error [control]="this.personForm.get('addressLine1')"></app-valdr-error>
 </form>

@@ -1,24 +1,94 @@
-# ValdrNg
+# ValdrNG
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.0.
+Angular reactive forms util which generates configuration and validators for constraints.
 
-## Code scaffolding
+Inspired by [Valdr for AngularJS](https://github.com/netceteragroup/valdr).
 
-Run `ng generate component component-name --project valdr-ng` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project valdr-ng`.
-> Note: Don't forget to add `--project valdr-ng` or else it will be added to the default project in your `angular.json` file. 
+### Built-in validators
 
-## Build
+* **size** - Validates field size
 
-Run `ng build valdr-ng` to build the project. The build artifacts will be stored in the `dist/` directory.
+```typescript
+{
+  size: {
+    min: number;
+    max: number;
+    message: string;
+  }
+}
+```
 
-## Publishing
+* **min** - Minimum numeric value
 
-After building your library with `ng build valdr-ng`, go to the dist folder `cd dist/valdr-ng` and run `npm publish`.
+```typescript
+{
+  min: {
+    value: number;
+    message: string;
+  }
+}
+```
 
-## Running unit tests
+* **max** - Maximum numeric value
 
-Run `ng test valdr-ng` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```typescript
+{
+  max: {
+    value: number;
+    message: string;
+  }
+}
+```
 
-## Further help
+* **minLength** - Minimum length of a string
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```typescript
+{
+  minLength: {
+    value: number;
+    message: string;
+  }
+}
+```
+
+* **maxLength** - Maximum length of a string
+
+```typescript
+{
+  maxLength: {
+    value: number;
+    message: string;
+  }
+}
+```
+
+* **email** - Checks for valid e-mail.
+
+```typescript
+{
+  email: {
+    message: string;
+  }
+}
+```
+
+* **pattern** - Validates by the given pattern
+
+```typescript
+{
+  pattern: {
+    value: string;
+    message: string;
+  }
+}
+```
+
+* **url** - Checks if the field has valid URL, currently supports urls starting with http, https & ftp.
+
+```typescript
+{
+  url: {
+    message: string;
+  }
+}
+```

@@ -86,10 +86,10 @@ describe('ValdrNgService', () => {
       })
     });
 
-    it('should throw error if the model is not present', () => {
+    it('should throw error if the type is not present', () => {
       // given / when / then
       expect(() => service.createFormGroupControls({}, 'SomeModel'))
-        .toThrow(new Error('No constraints provided for model SomeModel.'));
+        .toThrow(new Error('No constraints provided for type \'SomeModel\'.'));
     })
 
     it('should create constraints for first name', () => {
@@ -138,16 +138,16 @@ describe('ValdrNgService', () => {
       })
     });
 
-    it('should throw error if the model is not present', () => {
+    it('should throw error if the type is not present', () => {
       // given / when / then
       expect(() => service.getValidatorsForField('SomeModel', 'SomeField'))
-        .toThrow(new Error('No constraints provided for model SomeModel.'));
+        .toThrow(new Error('No constraints provided for type \'SomeModel\'.'));
     });
 
     it('should throw error if the field is not present', () => {
       // given / when / then
       expect(() => service.getValidatorsForField('Person', 'SomeField'))
-        .toThrow(new Error('No constraints provided for Person.SomeField.'));
+        .toThrow(new Error('No constraints provided for \'Person.SomeField\'.'));
     });
 
     it('should get validators for field', () => {

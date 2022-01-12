@@ -1,61 +1,65 @@
 import {AbstractControl, ValidationErrors} from '@angular/forms';
 
-export interface BaseValidator {
+export interface BaseValidatorConfig {
   message: string;
 }
 
-interface DecimalValidator extends BaseValidator{
+export interface DecimalValidatorConfig extends BaseValidatorConfig {
   inclusive?: boolean;
   value: string | number;
 }
 
-interface DecimalMaxValidator {
-  max: DecimalValidator;
+export interface DecimalMaxValidator {
+  max: DecimalValidatorConfig;
 }
 
-interface DecimalMinValidator {
-  min: DecimalValidator;
+export interface DecimalMinValidator {
+  min: DecimalValidatorConfig;
 }
 
-interface BaseLengthValidator {
+export interface BaseLengthValidatorConfig extends BaseValidatorConfig {
   number: number;
 }
 
-interface MaxLengthValidator {
-  maxLength: BaseValidator & BaseLengthValidator;
+export interface MaxLengthValidator {
+  maxLength: BaseLengthValidatorConfig;
 }
 
-interface MinLengthValidator {
-  minLength: BaseValidator & BaseLengthValidator;
+export interface MinLengthValidator {
+  minLength: BaseLengthValidatorConfig;
 }
 
 interface EmailValidator {
-  email: BaseValidator;
+  email: BaseValidatorConfig;
+}
+
+export interface PatternValidatorConfig extends BaseValidatorConfig{
+  value: string | RegExp;
 }
 
 interface PatternValidator {
-  pattern: BaseValidator & {
-    value: string | RegExp;
-  }
+  pattern: PatternValidatorConfig
+}
+
+export interface SizeValidatorConfig extends BaseValidatorConfig {
+  min?: number;
+  max?: number;
 }
 
 interface SizeValidator {
-  size: BaseValidator & {
-    min: number;
-    max: number;
-  }
+  size: SizeValidatorConfig;
 }
 
 interface UrlValidator {
-  url: BaseValidator;
+  url: BaseValidatorConfig;
 }
 
 interface RequiredValidator {
-  required: BaseValidator;
+  required: BaseValidatorConfig;
 }
 
 export interface ValdrModelConstraints {
-  [field: string]: BaseValidator | EmailValidator | PatternValidator | SizeValidator | RequiredValidator |
+  [field: string]: BaseValidatorConfig | EmailValidator | PatternValidator | SizeValidator | RequiredValidator |
     DecimalMaxValidator | DecimalMinValidator | MaxLengthValidator | MinLengthValidator | UrlValidator;
 }
 

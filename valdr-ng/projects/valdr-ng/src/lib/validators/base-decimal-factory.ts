@@ -1,5 +1,5 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {ValdrValidationFn} from '../model';
+import {DecimalValidatorConfig, ValdrValidationFn} from '../model';
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 /**
@@ -7,7 +7,7 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
  */
 export abstract class DecimalFactory extends BaseValidatorFactory {
 
-  createValidator(config: any): ValdrValidationFn[] {
+  createValidator(config: DecimalValidatorConfig): ValdrValidationFn[] {
     const validationFn = (control: AbstractControl): ValidationErrors | null => {
       if (config.inclusive) {
         return this.handleInclusive(config, control);

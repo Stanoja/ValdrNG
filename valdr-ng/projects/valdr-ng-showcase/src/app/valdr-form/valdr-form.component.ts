@@ -10,14 +10,14 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class ValdrFormComponent implements OnInit {
 
   @Input() person: any;
-  personFormWithValdrNg!: FormGroup;
+  personForm!: FormGroup;
 
   constructor(private valdrNgService: ValdrNgService,
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
     const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');
-    this.personFormWithValdrNg = this.fb.group(controls);
+    this.personForm = this.fb.group(controls);
   }
 
 }

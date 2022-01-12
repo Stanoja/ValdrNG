@@ -7,6 +7,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ValdrErrorComponent} from './valdr-error/valdr-error.component';
 import {ValdrFormComponent} from './valdr-form/valdr-form.component';
 import {SimpleFormComponent} from './simple-form/simple-form.component';
+import {ValdrNgService} from '../../../valdr-ng/src/lib/valdr-ng.service';
+
+import * as constraints from '../assets/constraints.json';
 
 @NgModule({
   declarations: [
@@ -25,4 +28,8 @@ import {SimpleFormComponent} from './simple-form/simple-form.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  constructor(private valdrNgService: ValdrNgService) {
+    valdrNgService.setConstraints(constraints);
+  }
 }

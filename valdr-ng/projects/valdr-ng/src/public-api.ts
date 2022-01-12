@@ -3,4 +3,5 @@
  */
 
 export * from './lib/valdr-ng.service';
-export * from './lib/valdr-ng.module';
+export {ValdrNgModule} from './lib/valdr-ng.module';
+export * from './lib/model';

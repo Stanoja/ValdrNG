@@ -51,16 +51,16 @@ export class ValdrNgService {
    * ({@see setConstraints}).
    *
    * @param model the model
-   * @param modelName the model name
+   * @param typeName the type name
    * @param additionalValidators additional validators per field
    */
-  createFormGroupControls(model: any, modelName: string, additionalValidators?: {[key: string]: ValdrValidationFn[]}) {
-    const modelConstraints = this.constraints[modelName];
-    if (modelConstraints === undefined) {
-      throw new Error(`No constraints provided for model ${modelName}.`);
+  createFormGroupControls(model: any, typeName: string, additionalValidators?: {[key: string]: ValdrValidationFn[]}) {
+    const typeConstraints = this.constraints[typeName];
+    if (typeConstraints === undefined) {
+      throw new Error(`No constraints provided for type '${typeName}'.`);
     }
     const controls: any = {};
-    Object.entries(modelConstraints).forEach(([field, value]) => {
+    Object.entries(typeConstraints).forEach(([field, value]) => {
       controls[field] = [model[field], [...this.getValidators(value)]];
     });
     if (additionalValidators) {
@@ -76,20 +76,20 @@ export class ValdrNgService {
   }
 
   /**
-   * Get validators for the field of the given model.
+   * Get validators for the field of the given type.
    *
-   * @param modelName the model name
+   * @param typeName the model name
    * @param fieldName the field name
    * @return validators for the given field
    */
-  public getValidatorsForField(modelName: string, fieldName: string): ValdrValidationFn[] {
-    const modelConstraints = this.constraints[modelName];
-    if (modelConstraints === undefined) {
-      throw new Error(`No constraints provided for model ${modelName}.`);
+  public getValidatorsForField(typeName: string, fieldName: string): ValdrValidationFn[] {
+    const typeConstraints = this.constraints[typeName];
+    if (typeConstraints === undefined) {
+      throw new Error(`No constraints provided for type '${typeName}'.`);
     }
-    const fieldConstraints = modelConstraints[fieldName];
+    const fieldConstraints = typeConstraints[fieldName];
     if (fieldConstraints === undefined) {
-      throw new Error(`No constraints provided for ${modelName}.${fieldName}.`);
+      throw new Error(`No constraints provided for '${typeName}.${fieldName}'.`);
     }
     return this.getValidators(fieldConstraints);
   }

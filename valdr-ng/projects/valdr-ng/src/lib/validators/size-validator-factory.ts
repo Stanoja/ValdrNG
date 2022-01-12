@@ -1,10 +1,10 @@
 import {BaseValidatorFactory} from './base-validator-factory';
 import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {ValdrValidationFn} from '../model';
+import {SizeValidatorConfig, ValdrValidationFn} from '../model';
 import {Injectable} from '@angular/core';
 
 /**
- * Handles {@link Validators.minLength} and {@link Validators.maxLength}.
+ * Handles {@link Validators.minLength} and {@link Validators.maxLength} validation.
  */
 @Injectable()
 export class SizeValidatorFactory extends BaseValidatorFactory {
@@ -12,7 +12,7 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
     return 'size';
   }
 
-  createValidator(config: any): ValdrValidationFn[] {
+  createValidator(config: SizeValidatorConfig): ValdrValidationFn[] {
     if (config.max !== undefined) {
       return [
         this.getMinLengthValidator(config),
@@ -22,12 +22,12 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
     return [this.getMinLengthValidator(config)];
   }
 
-  private getMinLengthValidator(config: any) {
+  private getMinLengthValidator(config: SizeValidatorConfig) {
     return this.getValidatorFn(config.message, 'minlength', Validators.minLength(config.min || 0));
   }
 
-  private getMaxLengthValidator(config: any) {
-    return this.getValidatorFn(config.message, 'maxlength', Validators.maxLength(config.max));
+  private getMaxLengthValidator(config: SizeValidatorConfig) {
+    return this.getValidatorFn(config.message, 'maxlength', Validators.maxLength(config.max as number));
   }
 
   private getValidatorFn(message: string, messageField: string, validatorFn: ValidatorFn): ValidatorFn {
