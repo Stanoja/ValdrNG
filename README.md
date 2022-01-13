@@ -255,7 +255,7 @@ export class AppModule {
 ValdrNG uses the provided [Angular validators](https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts)
 and wraps them by validator name, and returning the `message` along with the validation result.
 
-This makes couple of things easier:
+That makes couple of things easier:
 * Migration of the current forms to ValdrNG (validation result is extended)
 * Easily accessible a dedicated message for each field (see the usage)
 
