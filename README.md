@@ -246,7 +246,7 @@ export class AppModule {
           }
         }
       }
-    })
+    });
   }
 }
 ```
