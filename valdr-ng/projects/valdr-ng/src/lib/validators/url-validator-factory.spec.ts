@@ -26,7 +26,7 @@ describe('MinLengthValidatorFactory', () => {
       let validator: ValdrValidationFn | null = {} as any;
 
       beforeEach(() => {
-        validator = urlValidatorFactory!.createValidator({message: 'Should be a valid URL.'})[0];
+        validator = urlValidatorFactory!.createValidator({message: 'Should be a valid URL.'});
       });
 
       afterAll(() => validator = null);

@@ -19,5 +19,5 @@ export abstract class BaseValidatorFactory {
    * @param config: any
    * @return valdr validation functions
    */
-  abstract createValidator(config: any): ValdrValidationFn[];
+  abstract createValidator(config: any): ValdrValidationFn;
 }

@@ -48,8 +48,8 @@ describe('ValdrNgService', () => {
   it('it should add valdr validators', () => {
     // given
     const validator: BaseValidatorFactory = {
-      createValidator(): ValdrValidationFn[] {
-        return [() => null];
+      createValidator(): ValdrValidationFn {
+        return () => null;
       },
       getConstraintName(): string {
         return 'testConstraint';
@@ -155,7 +155,7 @@ describe('ValdrNgService', () => {
       const validators = service.getValidatorsForField('Person', 'firstName');
 
       // then
-      expect(validators).toHaveSize(3);
+      expect(validators).toHaveSize(2);
     });
 
 
@@ -169,7 +169,7 @@ describe('ValdrNgService', () => {
 
       // then
       expect(console.warn).toHaveBeenCalledOnceWith('No validator found for constraint \'required\'.')
-      expect(validators).toHaveSize(2);
+      expect(validators).toHaveSize(1);
     });
   });
 });

@@ -26,7 +26,7 @@ describe('EmailValidatorFactory', () => {
       let validator: ValdrValidationFn | null = {} as any;
 
       beforeEach(() => {
-        validator = emailValidatorFactory!.createValidator({message: 'Should be valid email.'})[0];
+        validator = emailValidatorFactory!.createValidator({message: 'Should be valid email.'});
       });
 
       afterAll(() => validator = null);

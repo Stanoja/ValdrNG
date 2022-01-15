@@ -12,8 +12,8 @@ export class PatternValidatorFactory extends BaseValidatorFactory {
     return 'pattern';
   }
 
-  createValidator(config: PatternValidatorConfig): ValdrValidationFn[] {
-    function validatorFn(control: AbstractControl): ValidationErrors | null {
+  createValidator(config: PatternValidatorConfig): ValdrValidationFn {
+    return function (control: AbstractControl): ValidationErrors | null {
       const result = Validators.pattern(config.value)(control);
       if (result === null) {
         return null;
@@ -21,8 +21,6 @@ export class PatternValidatorFactory extends BaseValidatorFactory {
       result['pattern'].message = config.message;
       return result;
     }
-
-    return [validatorFn];
   }
 
 }

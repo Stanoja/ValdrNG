@@ -29,7 +29,7 @@ describe('MaxLengthValidatorFactory', () => {
         validator = maxLengthValidatorHandler!.createValidator({
           number: 4,
           message: 'Should be shorter than 4.'
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);

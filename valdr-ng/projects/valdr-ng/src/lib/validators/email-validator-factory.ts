@@ -12,8 +12,8 @@ export class EmailValidatorFactory extends BaseValidatorFactory {
     return 'email';
   }
 
-  createValidator({message}: BaseValidatorConfig): ValdrValidationFn[] {
-    function validatorFn(control: AbstractControl): ValidationErrors | null {
+  createValidator({message}: BaseValidatorConfig): ValdrValidationFn {
+    return function(control: AbstractControl): ValidationErrors | null {
       if (Validators.email(control) !== null) {
         return {
           email: {
@@ -23,7 +23,6 @@ export class EmailValidatorFactory extends BaseValidatorFactory {
       }
       return null;
     }
-    return [validatorFn];
   }
 
 }

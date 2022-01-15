@@ -12,8 +12,8 @@ export class RequiredValidatorFactory extends BaseValidatorFactory {
     return 'required';
   }
 
-  createValidator({message}: BaseValidatorConfig): ValdrValidationFn[] {
-    function required(control: AbstractControl): ValidationErrors | null {
+  createValidator({message}: BaseValidatorConfig): ValdrValidationFn {
+    return function(control: AbstractControl): ValidationErrors | null {
       const result = Validators.required(control);
       if (result === null) {
         return null;
@@ -24,7 +24,5 @@ export class RequiredValidatorFactory extends BaseValidatorFactory {
         }
       }
     }
-
-    return [required];
   }
 }

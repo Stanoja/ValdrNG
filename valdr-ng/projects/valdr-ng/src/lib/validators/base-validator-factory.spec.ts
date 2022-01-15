@@ -6,8 +6,8 @@ describe('BaseValidatorFactory', () => {
 
   beforeEach(() => {
     validatorHandler = ({
-      createValidator(): ValdrValidationFn[] {
-        return [() => null];
+      createValidator(): ValdrValidationFn {
+        return () => null;
       },
       getConstraintName(): string {
         return 'constraintName';

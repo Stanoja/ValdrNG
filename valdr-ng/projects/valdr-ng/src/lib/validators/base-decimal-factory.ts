@@ -7,14 +7,13 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
  */
 export abstract class DecimalFactory extends BaseValidatorFactory {
 
-  createValidator(config: DecimalValidatorConfig): ValdrValidationFn[] {
-    const validationFn = (control: AbstractControl): ValidationErrors | null => {
+  createValidator(config: DecimalValidatorConfig): ValdrValidationFn {
+    return (control: AbstractControl): ValidationErrors | null => {
       if (config.inclusive) {
         return this.handleInclusive(config, control);
       }
       return this.handleExclusive(config, control);
-    }
-    return [validationFn];
+    };
   }
 
   /**

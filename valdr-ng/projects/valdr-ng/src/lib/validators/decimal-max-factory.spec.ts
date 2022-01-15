@@ -31,7 +31,7 @@ describe('DecimalMaxFactory', () => {
         validator = decimalMaxFactory!.createValidator({
           value: 10,
           message: 'Should be less than 10.'
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);
@@ -72,7 +72,7 @@ describe('DecimalMaxFactory', () => {
           value: 20,
           message: 'Should be less than 20.',
           inclusive: false
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);

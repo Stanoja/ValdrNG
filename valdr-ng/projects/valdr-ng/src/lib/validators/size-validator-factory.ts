@@ -12,14 +12,24 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
     return 'size';
   }
 
-  createValidator(config: SizeValidatorConfig): ValdrValidationFn[] {
-    if (config.max !== undefined) {
-      return [
-        this.getMinLengthValidator(config),
-        this.getMaxLengthValidator(config)
-      ];
+  createValidator(config: SizeValidatorConfig): ValdrValidationFn {
+    if (config.max === undefined) {
+      return this.getMinLengthValidator(config);
     }
-    return [this.getMinLengthValidator(config)];
+    return (control: AbstractControl): ValidationErrors | null => {
+      const minResult = this.getMinLengthValidator(config)(control);
+      const maxResult = this.getMaxLengthValidator(config)(control);
+      if (!minResult) {
+        return maxResult;
+      }
+      if (!maxResult) {
+        return minResult;
+      }
+      return {
+        ...minResult,
+        ...maxResult
+      };
+    };
   }
 
   private getMinLengthValidator(config: SizeValidatorConfig) {

@@ -29,7 +29,7 @@ describe('PatternValidatorFactory', () => {
         validator = patternValidatorHandler!.createValidator({
           value: '[a-zA-Z ]*',
           message: 'Should match \'[a-zA-Z ]*\'.'
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);

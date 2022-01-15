@@ -29,7 +29,7 @@ describe('MinLengthValidatorFactory', () => {
         validator = minLengthValidatorHandler!.createValidator({
           number: 4,
           message: 'Should be longer than 4.'
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);

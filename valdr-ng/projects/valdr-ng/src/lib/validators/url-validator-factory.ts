@@ -14,8 +14,8 @@ export class UrlValidatorFactory extends BaseValidatorFactory {
     return 'url';
   }
 
-  createValidator({message}: BaseValidatorConfig): ValdrValidationFn[] {
-    const validateFn = ({value}: AbstractControl): ValidationErrors | null => {
+  createValidator({message}: BaseValidatorConfig): ValdrValidationFn {
+    return ({value}: AbstractControl): ValidationErrors | null => {
       if (value === null || value === '') {
         return null;
       }
@@ -27,8 +27,7 @@ export class UrlValidatorFactory extends BaseValidatorFactory {
           message
         }
       };
-    }
-    return [validateFn];
+    };
   }
 
 }

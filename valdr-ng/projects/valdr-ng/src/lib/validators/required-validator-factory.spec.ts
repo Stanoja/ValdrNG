@@ -25,7 +25,7 @@ describe('RequiredValidatorHandler', () => {
       let validator: ValdrValidationFn | null = {} as any;
 
       beforeEach(() => {
-        validator = requiredValidatorHandler!.createValidator({message: 'This field is required.'})[0];
+        validator = requiredValidatorHandler!.createValidator({message: 'This field is required.'});
       });
 
       afterAll(() => validator = null);

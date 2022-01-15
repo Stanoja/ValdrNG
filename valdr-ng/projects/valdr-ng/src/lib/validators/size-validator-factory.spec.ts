@@ -32,7 +32,7 @@ describe('SizeValidatorFactory', () => {
         validator = sizeValidatorHandler!.createValidator({
           min: 5,
           message: 'This field should be longer than 5.'
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);
@@ -71,7 +71,7 @@ describe('SizeValidatorFactory', () => {
         validator = sizeValidatorHandler!.createValidator({
           max: 10,
           message: 'This field should be shorter than 10.'
-        })[0];
+        });
       });
 
       afterAll(() => validator = null);
@@ -97,7 +97,9 @@ describe('SizeValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toBeNull();
+        expect(result).toEqual(jasmine.objectContaining({
+          maxlength: jasmine.objectContaining({message: 'This field should be shorter than 10.'})
+        }));
       });
     });
   });

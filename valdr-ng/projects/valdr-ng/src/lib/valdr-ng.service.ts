@@ -103,6 +103,6 @@ export class ValdrNgService {
         console.warn(`No validator found for constraint '${k}'.`);
         return false;
       })
-      .flatMap(([k, v]) => this.validatorsPerField[k].createValidator(v));
+      .map(([k, v]) => this.validatorsPerField[k].createValidator(v));
   }
 }
