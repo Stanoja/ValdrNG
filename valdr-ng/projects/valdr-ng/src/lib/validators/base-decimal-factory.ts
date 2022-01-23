@@ -1,6 +1,6 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {DecimalValidatorConfig, ValdrValidationFn} from '../model';
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {DecimalValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
+import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 /**
  * Handles decimal validation with exclusive case.
@@ -8,7 +8,7 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 export abstract class DecimalFactory extends BaseValidatorFactory {
 
   createValidator(config: DecimalValidatorConfig): ValdrValidationFn {
-    return (control: AbstractControl): ValidationErrors | null => {
+    return (control: AbstractControl): ValdrValidationErrors | null => {
       if (config.inclusive) {
         return this.handleInclusive(config, control);
       }
@@ -32,7 +32,7 @@ export abstract class DecimalFactory extends BaseValidatorFactory {
    */
   abstract getMainValidator(value: number): ValidatorFn;
 
-  private handleExclusive(config: any, control: AbstractControl): ValidationErrors | null {
+  private handleExclusive(config: any, control: AbstractControl): ValdrValidationErrors | null {
     if (!control.value || isNaN(control.value)) {
       return null;
     }

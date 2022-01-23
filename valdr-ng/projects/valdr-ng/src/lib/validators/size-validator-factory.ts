@@ -1,6 +1,6 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {SizeValidatorConfig, ValdrValidationFn} from '../model';
+import {AbstractControl, ValidatorFn, Validators} from '@angular/forms';
+import {SizeValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
 import {Injectable} from '@angular/core';
 
 /**
@@ -16,7 +16,7 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
     if (config.max === undefined) {
       return this.getMinLengthValidator(config);
     }
-    return (control: AbstractControl): ValidationErrors | null => {
+    return (control: AbstractControl): ValdrValidationErrors | null => {
       const minResult = this.getMinLengthValidator(config)(control);
       const maxResult = this.getMaxLengthValidator(config)(control);
       if (!minResult) {
@@ -41,7 +41,7 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
   }
 
   private getValidatorFn(message: string, messageField: string, validatorFn: ValidatorFn): ValidatorFn {
-    return function validator(control: AbstractControl): ValidationErrors | null {
+    return function validator(control: AbstractControl): ValdrValidationErrors | null {
       const result = validatorFn(control);
       if (result !== null && result[messageField]) {
         result[messageField]['message'] = message;

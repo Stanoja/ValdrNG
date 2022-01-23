@@ -1,6 +1,6 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {AbstractControl, ValidationErrors, Validators} from '@angular/forms';
-import {BaseValidatorConfig, ValdrValidationFn} from '../model';
+import {AbstractControl, Validators} from '@angular/forms';
+import {BaseValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
 import {Injectable} from '@angular/core';
 
 /**
@@ -13,7 +13,7 @@ export class RequiredValidatorFactory extends BaseValidatorFactory {
   }
 
   createValidator({message}: BaseValidatorConfig): ValdrValidationFn {
-    return function(control: AbstractControl): ValidationErrors | null {
+    return function(control: AbstractControl): ValdrValidationErrors | null {
       const result = Validators.required(control);
       if (result === null) {
         return null;
