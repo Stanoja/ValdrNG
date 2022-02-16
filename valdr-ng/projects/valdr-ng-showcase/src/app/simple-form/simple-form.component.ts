@@ -23,61 +23,50 @@ export class SimpleFormComponent implements OnInit {
       email: [this.person.email, Validators.email],
       age: [this.person.age, [Validators.min(10), Validators.max(100)]],
       homepage: [this.person.homepage, [this.urlValidatorFn]],
-      addressLine1: [this.person.addressLine1, [Validators.minLength(2), Validators.maxLength(20)]]
+      addressLine1: [this.person.addressLine1, [Validators.minLength(2), Validators.maxLength(20)]],
+      myValue: [this.person.myValue]
     });
   }
 
   isFirstNameInvalidInLength() {
-    const firstName = this.personForm.get('firstName');
-    return this.personForm.touched && firstName?.errors
-      ? firstName.errors['minlength'] || firstName.errors['maxlength']
-      : false;
+    const errors = this.personForm.get('firstName')?.errors;
+    return this.personForm.touched && (errors?.['minlength'] || errors?.['maxlength']);
   }
 
   isFirstNameInvalidInRequired() {
-    const firstName = this.personForm.get('firstName');
-    return this.personForm.touched && firstName?.errors ?firstName.errors['required'] : false;
+    return this.personForm.touched && this.personForm.get('firstName')?.errors?.['required'];
   }
 
   isUsernameInvalid() {
-    const username = this.personForm.get('username');
-    return this.personForm.touched && username?.errors ? username.errors['pattern'] : false;
+    return this.personForm.touched && this.personForm.get('username')?.errors?.['pattern'];
   }
 
   isEmailInvalid() {
-    const email = this.personForm.get('email');
-    return this.personForm.touched && email?.errors ? email.errors['email'] : false;
+    return this.personForm.touched && this.personForm.get('email')?.errors?.['email'];
   }
 
   isMaxAgeInvalid() {
-    const age = this.personForm.get('age');
-    return this.personForm.touched && age?.errors ? age.errors['max'] : false;
+    return this.personForm.touched && this.personForm.get('age')?.errors?.['max'];
   }
 
   isMinAgeInvalid() {
-    const age = this.personForm.get('age');
-    return this.personForm.touched && age?.errors ? age.errors['min'] : false;
+    return this.personForm.touched && this.personForm.get('age')?.errors?.['min'];
   }
 
   isHomepageInvalid() {
-    const homepage = this.personForm.get('homepage');
-    return this.personForm.touched && homepage?.errors
-      ? homepage.errors['url']
-      : false;
+    return this.personForm.touched && this.personForm.get('homepage')?.errors?.['url'];
   }
 
   isAddressLine1InvalidInMaxLength() {
-    const maxLength = this.personForm.get('addressLine1');
-    return this.personForm.touched && maxLength?.errors
-      ? maxLength.errors['maxlength']
-      : false;
+    return this.personForm.touched && this.personForm.get('addressLine1')?.errors?.['maxlength'];
   }
 
   isAddressLine1InvalidInMinLength() {
-    const minLength = this.personForm.get('addressLine1');
-    return this.personForm.touched && minLength?.errors
-      ? minLength.errors['minlength']
-      : false;
+    return this.personForm.touched && this.personForm.get('addressLine1')?.errors?.['minlength'];
+  }
+
+  isMyValueInvalid() {
+    return this.personForm.touched && this.personForm.get('myValue')?.value !== 'some-value';
   }
 
 
