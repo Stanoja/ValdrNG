@@ -8,6 +8,7 @@ import {ValdrErrorComponent} from './valdr-error/valdr-error.component';
 import {ValdrFormComponent} from './valdr-form/valdr-form.component';
 import {SimpleFormComponent} from './simple-form/simple-form.component';
 import {ValdrNgService} from '../../../valdr-ng/src/lib/valdr-ng.service';
+import {ValueValidator} from './validators/value.validator';
 
 import * as constraints from '../assets/constraints.json';
 
@@ -22,7 +23,7 @@ import * as constraints from '../assets/constraints.json';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    ValdrNgModule.forRoot([])
+    ValdrNgModule.forRoot([ValueValidator])
   ],
   providers: [],
   bootstrap: [AppComponent]

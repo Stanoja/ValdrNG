@@ -14,7 +14,8 @@ export class AppComponent {
     email: '',
     age: null,
     homepage: null,
-    addressLine1: 'My Address'
+    addressLine1: 'My Address',
+    myValue: ''
   };
 
 }

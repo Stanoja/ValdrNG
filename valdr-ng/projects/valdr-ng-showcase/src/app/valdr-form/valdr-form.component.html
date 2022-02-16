@@ -24,4 +24,8 @@
   <label>Address line 1: </label>
   <input formControlName="addressLine1">
   <app-valdr-error [control]="this.personForm.get('addressLine1')"></app-valdr-error>
+  <br>
+  <label>My value: </label>
+  <input formControlName="myValue">
+  <app-valdr-error [control]="this.personForm.get('myValue')"></app-valdr-error>
 </form>

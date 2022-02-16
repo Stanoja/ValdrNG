@@ -39,11 +39,18 @@ function getFactoryProvider(clazz: Type<any>) {
   ]
 })
 export class ValdrNgModule {
+  private static created = false;
+
   static forRoot(factories: Type<BaseValidatorFactory>[]): ModuleWithProviders<ValdrNgModule> {
+    if (ValdrNgModule.created) {
+      throw new Error('ValdrNgModule already created!');
+    }
+    ValdrNgModule.created = true;
+
     return {
       ngModule: ValdrNgModule,
       providers: [
-        factories.map(getFactoryProvider)
+        ...factories.map(getFactoryProvider)
       ]
     };
   }

@@ -46,6 +46,12 @@
         "number": 20,
         "message": "Address should be shorter than 20 characters."
       }
+    },
+    "myValue": {
+      "value": {
+        "value": "some-value",
+        "message": "The value should be 'some-value'."
+      }
     }
   }
 }

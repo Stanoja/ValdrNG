@@ -24,10 +24,10 @@
     <label>Age:</label>
     <input formControlName="age" type="number">
     <p *ngIf="isMaxAgeInvalid()">
-      Age should be greater or equal to 10.
+      Age should be less than or equal to 100.
     </p>
     <p *ngIf="isMinAgeInvalid()">
-      Age should be less than or equal to 100.
+      Age should be greater or equal to 10.
     </p>
     <br>
     <label>Homepage:</label>
@@ -43,6 +43,12 @@
     </p>
     <p *ngIf="isAddressLine1InvalidInMinLength()">
       Address line should be longer than 2 characters.
+    </p>
+    <br>
+    <label>My value:</label>
+    <input formControlName="myValue">
+    <p *ngIf="isMyValueInvalid()">
+      The value should be 'some-value'.
     </p>
   </div>
 </form>
