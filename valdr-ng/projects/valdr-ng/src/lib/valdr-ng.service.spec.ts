@@ -104,6 +104,24 @@ describe('ValdrNgService', () => {
       expect(formGroup.firstName).toEqual(jasmine.arrayContaining(['Stanoja']));
     });
 
+    it('should create form group controls for fields which are not present in the constraints', () => {
+      // given
+      const model = {
+        firstName: 'Stanoja',
+        secondName: 'S'
+      };
+
+      // when
+      const formGroup = service.createFormGroupControls(model, 'Person');
+
+      // then
+      expect(formGroup).toEqual(jasmine.objectContaining({
+        firstName: jasmine.arrayContaining([model.firstName, jasmine.any(Array)]),
+        secondName: jasmine.arrayContaining([model.secondName])
+      }));
+      expect((formGroup.secondName.length)).toBe(1);
+    });
+
     it('should create additional constraints for fields which are not present in the model', () => {
       // given
       const model = {firstName: 'Stanoja', lastName: 'Sst'};

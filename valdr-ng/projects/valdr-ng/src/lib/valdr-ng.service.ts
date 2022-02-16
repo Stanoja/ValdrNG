@@ -60,13 +60,16 @@ export class ValdrNgService {
       throw new Error(`No constraints provided for type '${typeName}'.`);
     }
     const controls: any = {};
+    Object.entries(model).forEach(([field]) => {
+      controls[field] = [model[field]];
+    })
     Object.entries(typeConstraints).forEach(([field, value]) => {
       controls[field] = [model[field], [...this.getValidators(value)]];
     });
     if (additionalValidators) {
       Object.entries(additionalValidators).forEach(([field, validatorFns]) => {
         if (controls[field]) {
-          controls[field][1] = [...controls[field[1]], ...validatorFns];
+          controls[field][1] = [...(controls[field][1] || []), ...validatorFns];
           return;
         }
         controls[field] = [model[field], validatorFns];
