@@ -1,6 +1,6 @@
 {
   "name": "valdr-ng",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.0",
   "description": "Library for creating Angular reactive form configuration.",
   "homepage": "https://github.com/Stanoja/ValdrNG",
   "author": {
