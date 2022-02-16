@@ -15,7 +15,7 @@ there are few more advantages to this:
 * Less form creation boilerplate
 * Possibility to generate the constraints from the models that are present on your back-end (see [valdr-bean-validation](https://github.com/netceteragroup/valdr-bean-validation) for Java)
 * Compliant with [Angular Reactive Forms](https://angular.io/guide/reactive-forms)
-* Easy extension with custom validators 
+* Easy extension with custom validators
 
 ## Install
 
@@ -155,7 +155,7 @@ The JSON object which defines the validation rules has the following structure:
 ## Validators
 
 Built-in validators:
-* **size** 
+* **size**
 * **min**
 * **max**
 * **minLength**
@@ -195,7 +195,7 @@ class MyValidator extends BaseValidatorFactory {
 
 2. Register it in `ValdrNgModule` or `ValdrNgService`:
 
-   - In the module
+- In the module
 
 ```typescript
 @NgModule({
@@ -210,7 +210,7 @@ export class AppModule {
 }
 ```
 
-   - Directly in the service
+- Directly in the service
 
 ```typescript
 

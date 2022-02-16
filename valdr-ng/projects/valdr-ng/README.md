@@ -17,17 +17,20 @@ there are few more advantages to this:
 * Compliant with [Angular Reactive Forms](https://angular.io/guide/reactive-forms)
 * Easy extension with custom validators
 
-## Install
-
-#### [NPM](http://www.npmjs.com)
+## Getting started
 
 1. Install `ValdrNg`
 
+#### [NPM](http://www.npmjs.com)
 ```bash
 npm i valdr-ng
 ```
+#### [Yarn](https://yarnpkg.com/)
+```bash
+yarn install valdr-ng
+```
 
-2. Register the `ValdrNgModule` inapplication module.
+2. Register the `ValdrNgModule` in application module.
 
 ```typescript
 @NgModule({
@@ -168,7 +171,7 @@ Built-in validators:
 
 ## Custom validator
 
-1. Create a validator by overriding [`BaseValidatorFactory`](valdr-ng/projects/valdr-ng/src/lib/validators/base-validator-factory.ts):
+1. Create a validator by overriding [`BaseValidatorFactory`](https://github.com/Stanoja/ValdrNG/blob/master/valdr-ng/projects/valdr-ng/src/lib/validators/base-validator-factory.ts):
 
 ```typescript
 @Injectable()
@@ -177,18 +180,18 @@ class MyValidator extends BaseValidatorFactory {
     return 'validByValue';
   }
 
-  createValidator(config: {value: string, message: string}): ValdrValidationFn[] {
+  createValidator(config: {value: string, message: string}): ValdrValidationFn {
     const validateFn = ({value}: AbstractControl): ValidationErrors | null => {
       if (value === null || value === config.value) {
         return null;
       }
       return {
         [this.getConstraintName()]: {
-          message
+          message: config.message
         }
       };
     }
-    return [validateFn];
+    return validateFn;
   }
 }
 ```
@@ -201,9 +204,6 @@ class MyValidator extends BaseValidatorFactory {
 @NgModule({
   imports: [
     ValdrNgModule.forRoot([MyValidator])
-  ],
-  providers: [
-    MyValidator
   ]
 })
 export class AppModule {
