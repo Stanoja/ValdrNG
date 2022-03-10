@@ -8,6 +8,14 @@
     "url": "https://github.com/Stanoja/"
   },
   "license": "MIT",
+  "keywords": [
+    "Angular",
+    "Forms",
+    "Valdr",
+    "ValdrNG",
+    "valdr-ng",
+    "Stanoja"
+  ],
   "peerDependencies": {
     "@angular/forms": "^13.0.0",
     "@angular/common": "^13.0.0",
