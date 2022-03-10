@@ -30,7 +30,7 @@ npm i valdr-ng
 yarn install valdr-ng
 ```
 
-2. Register the `ValdrNgModule` in application module.
+2. Register the `ValdrNgModule` in the application module.
 
 ```typescript
 @NgModule({
@@ -71,7 +71,9 @@ export class AppModule {
 }
 ```
 
-4. Use it to create form configuration from the model and model name
+4. Use it to:
+   <br />
+   4.1. create form configuration from the model and model name:
 
 ```typescript
 class MyComponent implements OnInit {
@@ -88,6 +90,32 @@ class MyComponent implements OnInit {
   ngOnInit(): void {
     const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');
     this.personForm = this.fb.group(controls);
+  }
+}
+
+```
+<br/>
+    4.2. add validators to existing FormGroup:
+
+```typescript
+class MyComponent implements OnInit {
+  personForm: FormGroup;
+
+  person = {
+    firstName: 'John',
+    username: ''
+  };
+
+  constructor(private valdrNgService: ValdrNgService,
+              private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    const controls = this.fb.group({
+      firstName: [this.person.firstName],
+      username: [this.person.username, [Validators.required]]
+    });
+    this.personForm = this.fb.group(controls);
+    this.valdrNgService.addValidators(this.personForm, 'Person');
   }
 }
 ```
@@ -225,7 +253,7 @@ export class AppModule {
 export class AppModule {
   constructor(valdrNgService: ValdrNgService,
               myValidator: MyValidator) {
-    valdrNgService.addValidators([myValidator]);
+    valdrNgService.addValidatorFactories([myValidator]);
   }
 }
 ```
@@ -236,7 +264,7 @@ export class AppModule {
 export class AppModule {
   constructor(valdrNgService: ValdrNgService,
               myValidator: MyValidator) {
-    valdrNgService.addValidators([myValidator]);
+    valdrNgService.addValidatorFactories([myValidator]);
     valdrNgService.setConstraints({
       'Person': {
         'password': {

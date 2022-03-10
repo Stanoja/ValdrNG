@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {ValdrNgService} from './valdr-ng.service';
-import {ValidatorFn} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn} from '@angular/forms';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
 import {ValdrValidationFn} from './model';
 import {SizeValidatorFactory} from './validators/size-validator-factory';
@@ -11,6 +11,9 @@ describe('ValdrNgService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule
+      ],
       providers: [
         {provide: BaseValidatorFactory, useClass: SizeValidatorFactory, multi: true},
         {provide: BaseValidatorFactory, useClass: RequiredValidatorFactory, multi: true},
@@ -57,7 +60,7 @@ describe('ValdrNgService', () => {
     };
 
     // when
-    service.addValidators([validator]);
+    service.addValidatorFactories([validator]);
 
     // then
     expect((service as any).validatorsPerField['testConstraint']).toBe(validator);
@@ -153,7 +156,7 @@ describe('ValdrNgService', () => {
             }
           }
         }
-      })
+      });
     });
 
     it('should throw error if the type is not present', () => {
@@ -189,5 +192,94 @@ describe('ValdrNgService', () => {
       expect(console.warn).toHaveBeenCalledOnceWith('No validator found for constraint \'required\'.')
       expect(validators).toHaveSize(1);
     });
+  });
+
+  describe('addValidatorsToFormGroupControls', () => {
+    let formGroup: FormGroup | null = null;
+
+    beforeEach(() => {
+      const formGroupControls = {
+        firstName: ['First name'],
+        lastName: ['Last name', () => {}],
+        city: ['City', [() => {}]],
+      };
+      formGroup = TestBed.inject(FormBuilder).group(formGroupControls);
+    });
+
+    afterAll(() => {
+      formGroup = null;
+    });
+
+    it('should add validators to control without validator', () => {
+      // given
+      service.setConstraints({
+        'Person': {
+          'firstName': {
+            'required': {
+              'message': 'First name is required.'
+            }
+          }
+        }
+      });
+
+      // when
+      service.addValidators(formGroup!, 'Person');
+
+      // then
+      const validator = formGroup!.get('firstName')!.validator!;
+      expect(validator).toBeDefined();
+      expectRequiredValidator(validator);
+    });
+
+    it('should add validators to control with existing validator', () => {
+      // given
+      service.setConstraints({
+        'Person': {
+          'lastName': {
+            'required': {
+              'message': 'Last name is required.'
+            }
+          }
+        }
+      });
+
+      // when
+      service.addValidators(formGroup!, 'Person');
+
+      // then
+      const validator = formGroup!.get('lastName')!.validator!;
+      expect(validator).toBeDefined();
+      expectRequiredValidator(validator)
+    });
+
+    it('should add validators to control with existing validators', () => {
+      // given
+      service.setConstraints({
+        'Person': {
+          'city': {
+            'required': {
+              'message': 'City is required.'
+            }
+          }
+        }
+      });
+
+      // when
+      service.addValidators(formGroup!, 'Person');
+
+      // then;
+      const validator = formGroup!.get('city')!.validator!;
+      expect(validator).toBeDefined();
+      expectRequiredValidator(validator);
+    });
+
+    function expectRequiredValidator(validator: ValidatorFn) {
+      const control = new FormControl('');
+      expect(validator(control)).toEqual(jasmine.objectContaining({
+        required: {
+          message: jasmine.stringContaining('is required')
+        }
+      }));
+    }
   });
 });

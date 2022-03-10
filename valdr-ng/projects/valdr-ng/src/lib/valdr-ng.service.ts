@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {ValdrConstraints, ValdrValidationFn} from './model';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
+import {FormGroup} from '@angular/forms';
 
 /**
  * Main ValdrNG service.
@@ -9,7 +10,7 @@ import {BaseValidatorFactory} from './validators/base-validator-factory';
  * Usage:
  * <ol>
  *   <li>Register constraints with {@link ValdrNgService.setConstraints}</li>
- *   <li>(Optional) Add custom validators with {@link ValdrNgService.addValidators}</li>
+ *   <li>(Optional) Add custom validators with {@link ValdrNgService.addValidatorFactories}</li>
  *   <li>Create the form group controls with {@link ValdrNgService.createFormGroupControls}</li>
  * </ol>
  *
@@ -38,11 +39,11 @@ export class ValdrNgService {
   }
 
   /**
-   * Add additional valdr validator handlers which extend {@link BaseValidatorFactory}.
+   * Add additional valdr validator factories which extend {@link BaseValidatorFactory}.
    *
    * @param validatorFactories the valdr validator factories
    */
-  addValidators(validatorFactories: BaseValidatorFactory[]) {
+  addValidatorFactories(validatorFactories: BaseValidatorFactory[]) {
     validatorFactories.forEach(factory => this.validatorsPerField[factory.getConstraintName()] = factory);
   }
 
@@ -55,10 +56,7 @@ export class ValdrNgService {
    * @param additionalValidators additional validators per field
    */
   createFormGroupControls(model: any, typeName: string, additionalValidators?: {[key: string]: ValdrValidationFn[]}) {
-    const typeConstraints = this.constraints[typeName];
-    if (typeConstraints === undefined) {
-      throw new Error(`No constraints provided for type '${typeName}'.`);
-    }
+    const typeConstraints = this.getTypeConstraints(typeName);
     const controls: any = {};
     Object.entries(model).forEach(([field]) => {
       controls[field] = [model[field]];
@@ -76,6 +74,24 @@ export class ValdrNgService {
       });
     }
     return controls;
+  }
+
+  /**
+   * Adds validators to the given form group for the type name based on the constraints ({@see setConstraints}).
+   *
+   * @param formGroup the form group
+   * @param typeName the type name
+   */
+  addValidators(formGroup: FormGroup, typeName: string): void {
+    const typeConstraints = this.getTypeConstraints(typeName);
+    Object.entries(formGroup.controls).forEach(([control, config]) => {
+      const fieldConstraints = typeConstraints[control];
+      if (!fieldConstraints) {
+        return;
+      }
+      const constraintValidators = this.getValidators(fieldConstraints);
+      config.addValidators(constraintValidators);
+    });
   }
 
   /**
@@ -107,5 +123,13 @@ export class ValdrNgService {
         return false;
       })
       .map(([k, v]) => this.validatorsPerField[k].createValidator(v));
+  }
+
+  private getTypeConstraints(typeName: string) {
+    const typeConstraints = this.constraints[typeName];
+    if (typeConstraints === undefined) {
+      throw new Error(`No constraints provided for type '${typeName}'.`);
+    }
+    return typeConstraints;
   }
 }
