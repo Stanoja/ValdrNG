@@ -1,4 +1,4 @@
-import {ValdrValidationFn} from '../model';
+import { ValdrValidatorFn } from '../model';
 
 /**
  * Base validator factory. Used to create validator for the given config and checks whether the validator created
@@ -19,5 +19,5 @@ export abstract class BaseValidatorFactory {
    * @param config: any
    * @return valdr validation functions
    */
-  abstract createValidator(config: any): ValdrValidationFn;
+  abstract createValidator(config: any): ValdrValidatorFn;
 }

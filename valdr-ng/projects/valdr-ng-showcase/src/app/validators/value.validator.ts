@@ -1,4 +1,4 @@
-import {BaseValidatorFactory, ValdrValidationFn} from '../../../../valdr-ng/src/public-api';
+import {BaseValidatorFactory, ValdrValidatorFn} from '../../../../valdr-ng/src/public-api';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class ValueValidator extends BaseValidatorFactory {
     return 'value';
   }
 
-  createValidator(config: { value: string; message: string }): ValdrValidationFn {
+  createValidator(config: { value: string; message: string }): ValdrValidatorFn {
     return (control => {
       if (control.value === config.value) {
         return null;

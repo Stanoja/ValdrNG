@@ -1,5 +1,5 @@
 import {MaxLengthValidatorFactory} from './max-length-validator-factory';
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 import {FormControl} from '@angular/forms';
 
 describe('MaxLengthValidatorFactory', () => {
@@ -23,7 +23,7 @@ describe('MaxLengthValidatorFactory', () => {
     });
 
     describe('should validate properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = maxLengthValidatorHandler!.createValidator({

@@ -1,4 +1,4 @@
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 import {FormControl} from '@angular/forms';
 import {MinLengthValidatorFactory} from "./min-length-validator-factory";
 import {UrlValidatorFactory} from "./url-validator-factory";
@@ -23,7 +23,7 @@ describe('MinLengthValidatorFactory', () => {
     });
 
     describe('should validate properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = urlValidatorFactory!.createValidator({message: 'Should be a valid URL.'});

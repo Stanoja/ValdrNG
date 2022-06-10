@@ -1,4 +1,4 @@
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 import {FormControl} from '@angular/forms';
 import {EmailValidatorFactory} from './email-validator-factory';
 
@@ -23,7 +23,7 @@ describe('EmailValidatorFactory', () => {
     });
 
     describe('should validate properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = emailValidatorFactory!.createValidator({message: 'Should be valid email.'});

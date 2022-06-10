@@ -1,5 +1,5 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {BaseValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
+import {BaseValidatorConfig, ValdrValidationErrors, ValdrValidatorFn} from '../model';
 import {AbstractControl} from '@angular/forms';
 import {Injectable} from '@angular/core';
 
@@ -14,7 +14,7 @@ export class UrlValidatorFactory extends BaseValidatorFactory {
     return 'url';
   }
 
-  createValidator({message}: BaseValidatorConfig): ValdrValidationFn {
+  createValidator({message}: BaseValidatorConfig): ValdrValidatorFn {
     return ({value}: AbstractControl): ValdrValidationErrors | null => {
       if (value === null || value === '') {
         return null;

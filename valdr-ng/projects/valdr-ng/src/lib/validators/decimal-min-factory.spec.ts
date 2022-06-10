@@ -1,4 +1,4 @@
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 import {FormControl} from '@angular/forms';
 import {DecimalMinFactory} from './decimal-min-factory';
 
@@ -25,7 +25,7 @@ describe('DecimalMinFactory', () => {
     });
 
     describe('should validate inclusive properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = decimalMinFactory!.createValidator({
@@ -65,7 +65,7 @@ describe('DecimalMinFactory', () => {
     })
 
     describe('should validate exclusive properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = decimalMinFactory!.createValidator({

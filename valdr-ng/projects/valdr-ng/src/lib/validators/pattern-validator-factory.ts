@@ -1,5 +1,5 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {PatternValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
+import {PatternValidatorConfig, ValdrValidationErrors, ValdrValidatorFn} from '../model';
 import {AbstractControl, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';
 
@@ -8,11 +8,12 @@ import {Injectable} from '@angular/core';
  */
 @Injectable()
 export class PatternValidatorFactory extends BaseValidatorFactory {
+
   getConstraintName(): string {
     return 'pattern';
   }
 
-  createValidator(config: PatternValidatorConfig): ValdrValidationFn {
+  createValidator(config: PatternValidatorConfig): ValdrValidatorFn {
     return function (control: AbstractControl): ValdrValidationErrors | null {
       const result = Validators.pattern(config.value)(control);
       if (result === null) {

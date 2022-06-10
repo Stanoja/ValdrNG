@@ -18,6 +18,11 @@ export class ValdrFormComponent implements OnInit {
   ngOnInit(): void {
     const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');
     this.personForm = this.fb.group(controls);
+
+    // This shows how one can use valdrNg to directly validate a value without using a form.
+    this.personForm.get('firstName')?.valueChanges.subscribe(name => {
+      console.log('manual name validation', this.valdrNgService.validate('Person', 'firstName', name));
+    })
   }
 
 }

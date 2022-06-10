@@ -1,6 +1,6 @@
 import {RequiredValidatorFactory} from './required-validator-factory';
 import {FormControl} from '@angular/forms';
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 
 describe('RequiredValidatorHandler', () => {
   let requiredValidatorHandler: RequiredValidatorFactory | null;
@@ -22,7 +22,7 @@ describe('RequiredValidatorHandler', () => {
     });
 
     describe('should validate properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = requiredValidatorHandler!.createValidator({message: 'This field is required.'});

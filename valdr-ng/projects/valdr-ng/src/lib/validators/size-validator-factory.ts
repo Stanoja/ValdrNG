@@ -1,6 +1,6 @@
 import {BaseValidatorFactory} from './base-validator-factory';
 import {AbstractControl, ValidatorFn, Validators} from '@angular/forms';
-import {SizeValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
+import {SizeValidatorConfig, ValdrValidationErrors, ValdrValidatorFn} from '../model';
 import {Injectable} from '@angular/core';
 
 /**
@@ -12,7 +12,7 @@ export class SizeValidatorFactory extends BaseValidatorFactory {
     return 'size';
   }
 
-  createValidator(config: SizeValidatorConfig): ValdrValidationFn {
+  createValidator(config: SizeValidatorConfig): ValdrValidatorFn {
     if (config.max === undefined) {
       return this.getMinLengthValidator(config);
     }
