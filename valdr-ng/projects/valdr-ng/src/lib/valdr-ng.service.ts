@@ -1,7 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
-import {ValdrConstraints, ValdrValidationFn} from './model';
+import {
+  ModelType,
+  ValdrConstraints,
+  ValdrModelConstraints,
+  ValdrValidationErrors,
+  ValdrValidatorFn,
+  CustomValidators
+} from './model';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 /**
  * Main ValdrNG service.
@@ -55,23 +62,25 @@ export class ValdrNgService {
    * @param typeName the type name
    * @param additionalValidators additional validators per field
    */
-  createFormGroupControls(model: any, typeName: string, additionalValidators?: {[key: string]: ValdrValidationFn[]}) {
-    const typeConstraints = this.getTypeConstraints(typeName);
-    const controls: any = {};
-    Object.entries(model).forEach(([field]) => {
+  createFormGroupControls<M extends ModelType = ModelType>(model: M,
+                                                           typeName: string,
+                                                           additionalValidators?: CustomValidators<M>) {
+    const typeConstraints = this.getTypeConstraints<M>(typeName);
+    const controls: {[k in keyof M]?: any} = {};
+    for (const field in model) {
       controls[field] = [model[field]];
-    })
-    Object.entries(typeConstraints).forEach(([field, value]) => {
-      controls[field] = [model[field], [...this.getValidators(value)]];
-    });
+    }
+    for (const field in typeConstraints) {
+      controls[field] = [model[field], [...this.getValidators(typeConstraints[field])]]
+    }
     if (additionalValidators) {
-      Object.entries(additionalValidators).forEach(([field, validatorFns]) => {
+      for (const field in additionalValidators) {
         if (controls[field]) {
-          controls[field][1] = [...(controls[field][1] || []), ...validatorFns];
-          return;
+          controls[field][1] = [...(controls[field][1] ?? []), ...additionalValidators[field]];
+        } else {
+          throw new Error(`No model value provided for custom validator on field '${field}'.`);
         }
-        controls[field] = [model[field], validatorFns];
-      });
+      }
     }
     return controls;
   }
@@ -83,14 +92,14 @@ export class ValdrNgService {
    * @param typeName the type name
    */
   addValidators(formGroup: FormGroup, typeName: string): void {
-    const typeConstraints = this.getTypeConstraints(typeName);
-    Object.entries(formGroup.controls).forEach(([control, config]) => {
-      const fieldConstraints = typeConstraints[control];
+    const typeConstraints = this.getTypeConstraints<any>(typeName);
+    Object.entries(formGroup.controls).forEach(([controlName, control]) => {
+      const fieldConstraints = typeConstraints[controlName];
       if (!fieldConstraints) {
         return;
       }
       const constraintValidators = this.getValidators(fieldConstraints);
-      config.addValidators(constraintValidators);
+      control.addValidators(constraintValidators);
     });
   }
 
@@ -101,7 +110,7 @@ export class ValdrNgService {
    * @param fieldName the field name
    * @return validators for the given field
    */
-  public getValidatorsForField(typeName: string, fieldName: string): ValdrValidationFn[] {
+  public getValidatorsForField(typeName: string, fieldName: string): ValdrValidatorFn[] {
     const typeConstraints = this.constraints[typeName];
     if (typeConstraints === undefined) {
       throw new Error(`No constraints provided for type '${typeName}'.`);
@@ -113,7 +122,20 @@ export class ValdrNgService {
     return this.getValidators(fieldConstraints);
   }
 
-  private getValidators(fieldConstraints: any): ValdrValidationFn[] {
+  /**
+   * Directly validate value for a given type and field.
+   *
+   * @param typeName the model name
+   * @param filedName the field name
+   * @param value the value to validate
+   * @return null or validation errors
+   */
+  public validate(typeName: string, filedName: string, value: any): ValdrValidationErrors | null {
+    const control = new FormControl(value, this.getValidatorsForField(typeName, filedName));
+    return control.errors;
+  }
+
+  private getValidators(fieldConstraints: any): ValdrValidatorFn[] {
     return Object.entries(fieldConstraints)
       .filter(([k]) => {
         if (this.validatorsPerField[k]) {
@@ -125,11 +147,11 @@ export class ValdrNgService {
       .map(([k, v]) => this.validatorsPerField[k].createValidator(v));
   }
 
-  private getTypeConstraints(typeName: string) {
+  private getTypeConstraints<M>(typeName: string): ValdrModelConstraints<M, any, any> {
     const typeConstraints = this.constraints[typeName];
     if (typeConstraints === undefined) {
       throw new Error(`No constraints provided for type '${typeName}'.`);
     }
-    return typeConstraints;
+    return typeConstraints as ValdrModelConstraints<M, any, any>;
   }
 }

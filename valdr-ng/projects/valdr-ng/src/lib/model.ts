@@ -29,7 +29,7 @@ export interface BaseValidator<T extends BaseValidatorConfig> {
 
 export interface DecimalValidatorConfig extends BaseValidatorConfig {
   inclusive?: boolean;
-  value: string | number;
+  value: number;
 }
 
 export interface DecimalMaxValidator extends BaseValidator<DecimalValidatorConfig> {
@@ -52,7 +52,7 @@ export interface MinLengthValidator extends BaseValidator<BaseLengthValidatorCon
   minLength: BaseLengthValidatorConfig;
 }
 
-interface EmailValidator extends BaseValidator<BaseValidatorConfig> {
+export interface EmailValidator extends BaseValidator<BaseValidatorConfig> {
   email: BaseValidatorConfig;
 }
 
@@ -60,7 +60,7 @@ export interface PatternValidatorConfig extends BaseValidatorConfig {
   value: string | RegExp;
 }
 
-interface PatternValidator extends BaseValidator<PatternValidatorConfig> {
+export interface PatternValidator extends BaseValidator<PatternValidatorConfig> {
   pattern: PatternValidatorConfig
 }
 
@@ -69,30 +69,55 @@ export interface SizeValidatorConfig extends BaseValidatorConfig {
   max?: number;
 }
 
-interface SizeValidator extends BaseValidator<SizeValidatorConfig> {
+export interface SizeValidator extends BaseValidator<SizeValidatorConfig> {
   size: SizeValidatorConfig;
 }
 
-interface UrlValidator extends BaseValidator<SizeValidatorConfig> {
+export interface UrlValidator extends BaseValidator<SizeValidatorConfig> {
   url: BaseValidatorConfig;
 }
 
-interface RequiredValidator extends BaseValidator<BaseValidatorConfig> {
+export interface RequiredValidator extends BaseValidator<BaseValidatorConfig> {
   required: BaseValidatorConfig;
 }
 
-export interface ValdrModelConstraints {
-  [field: string]: BaseValidatorConfig | EmailValidator | PatternValidator | SizeValidator | RequiredValidator
-    | DecimalMaxValidator | DecimalMinValidator | MaxLengthValidator | MinLengthValidator | UrlValidator
-    | BaseValidator<BaseValidatorConfig>;
-}
+/**
+ * Valdr provided validator types
+ */
+export type BuiltInValidators = EmailValidator | PatternValidator | SizeValidator | RequiredValidator |
+  DecimalMaxValidator | DecimalMinValidator | MaxLengthValidator | MinLengthValidator | UrlValidator |
+  BaseValidator<BaseValidatorConfig>;
 
+/**
+ * Per model validation configuration.
+ */
+export type ValdrModelConstraints<DomainDto, C extends BaseValidatorConfig, T extends BaseValidator<C>> = {
+  [field in keyof DomainDto]: T;
+};
+
+/**
+ * Valdr configuration object, typically produced by parsing the constraints.json file from the backend.
+ */
 export interface ValdrConstraints {
-  [model: string]: ValdrModelConstraints;
+  [type: string]: ValdrModelConstraints<ModelType, any, BuiltInValidators>;
 }
 
+/**
+ * Error being produced by valdr validators.
+ */
 export type ValdrValidationErrors = ValidationErrors & { message?: string };
 
-export interface ValdrValidationFn {
-  (control: AbstractControl): ValdrValidationErrors | null
-}
+/**
+ * The valdr generated angular forms validators.
+ */
+export type ValdrValidatorFn = (control: AbstractControl) => ValdrValidationErrors | null;
+
+/**
+ * Additional custom validators for a model. field refers to the field name in the model.
+ */
+export type CustomValidators<Type> = {[field in keyof Partial<Type>]: ValdrValidatorFn[] };
+
+/**
+ * Generic model type.
+ */
+export type ModelType = {[k: string]: any}

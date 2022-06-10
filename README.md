@@ -279,6 +279,40 @@ export class AppModule {
 }
 ```
 
+## Manual validation
+If you need to validate a value directly, without using a form control, you can use the following code:
+
+```typescript
+class MyComponent implements OnInit {
+  person = {firstName: 'John', username: ''};
+
+  constructor(private valdrNgService: ValdrNgService) {
+  }
+
+  ngOnInit(): void {
+    this.valdrNgService.setConstraints({
+      'Person': {
+        'firstName': {
+          'required': {
+            'message': 'First name is required.'
+          },
+        },
+        'username': {
+          'pattern': {
+            'value': '[a-zA-Z]{4,}',
+            'message': 'Username must be longer than 4 characters and match \'a-zA-Z\'.'
+          }
+        }
+      }
+    })
+    const firstNameValidity = this.valdrNgService.validate('Person', 'firstName', this.person.firstName);
+    // firsNameValidity == null
+    const userNameValidity = this.valdrNgService.validate('Person', 'username', this.person.username);
+    // userNameValidity == {'message': 'Username must be longer than 4 characters and match \'a-zA-Z\'.'}
+  }
+}
+```
+
 ### How it is integrated with Angular Forms
 ValdrNG uses the provided [Angular validators](https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts)
 and wraps them by validator name, and returning the `message` along with the validation result.

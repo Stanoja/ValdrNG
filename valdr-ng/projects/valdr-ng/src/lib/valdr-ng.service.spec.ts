@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {ValdrNgService} from './valdr-ng.service';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn} from '@angular/forms';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
-import {ValdrValidationFn} from './model';
+import {CustomValidators, ValdrValidatorFn} from './model';
 import {SizeValidatorFactory} from './validators/size-validator-factory';
 import {RequiredValidatorFactory} from './validators/required-validator-factory';
 
@@ -51,7 +51,7 @@ describe('ValdrNgService', () => {
   it('it should add valdr validators', () => {
     // given
     const validator: BaseValidatorFactory = {
-      createValidator(): ValdrValidationFn {
+      createValidator(): ValdrValidatorFn {
         return () => null;
       },
       getConstraintName(): string {
@@ -131,7 +131,7 @@ describe('ValdrNgService', () => {
       const validatorFn = () => null;
       const additionalControls = {
         lastName: [validatorFn]
-      } as { [key: string]: ValidatorFn[] };
+      } as CustomValidators<typeof model>;
 
       // when
       const formGroup = service.createFormGroupControls(model, 'Person', additionalControls);
@@ -281,5 +281,45 @@ describe('ValdrNgService', () => {
         }
       }));
     }
+  });
+
+  describe('validate', () => {
+    beforeEach(() => {
+      service.setConstraints({
+        'Person': {
+          'city': {
+            'required': {
+              'message': 'City is required.'
+            }
+          }
+        }
+      });
+    });
+
+    it('should validate valid value', () => {
+      // given
+      const value = 'City';
+
+      // when
+      const validationResult = service.validate('Person', 'city', value);
+
+      // then
+      expect(validationResult).toEqual(null);
+    });
+
+    it('should validate invalid value', () => {
+      // given
+      const value = '';
+
+      // when
+      const validationResult = service.validate('Person', 'city', value);
+
+      // then
+      expect(validationResult).toEqual({
+        required: {
+          message: jasmine.stringContaining('City is required')
+        }
+      });
+    });
   });
 });

@@ -1,5 +1,5 @@
 import {SizeValidatorFactory} from './size-validator-factory';
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 import {FormControl} from '@angular/forms';
 
 describe('SizeValidatorFactory', () => {
@@ -26,7 +26,7 @@ describe('SizeValidatorFactory', () => {
     });
 
     describe('should validate min properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = sizeValidatorHandler!.createValidator({
@@ -65,7 +65,7 @@ describe('SizeValidatorFactory', () => {
     });
 
     describe('should validate max properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = sizeValidatorHandler!.createValidator({

@@ -1,5 +1,5 @@
 import {PatternValidatorFactory} from './pattern-validator-factory';
-import {ValdrValidationFn} from '../model';
+import {ValdrValidatorFn} from '../model';
 import {FormControl} from '@angular/forms';
 
 describe('PatternValidatorFactory', () => {
@@ -23,7 +23,7 @@ describe('PatternValidatorFactory', () => {
     });
 
     describe('should validate properly', () => {
-      let validator: ValdrValidationFn | null = {} as any;
+      let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = patternValidatorHandler!.createValidator({

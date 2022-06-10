@@ -1,5 +1,5 @@
 import {BaseValidatorFactory} from './base-validator-factory';
-import {DecimalValidatorConfig, ValdrValidationErrors, ValdrValidationFn} from '../model';
+import {DecimalValidatorConfig, ValdrValidationErrors, ValdrValidatorFn} from '../model';
 import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 /**
@@ -7,7 +7,7 @@ import {AbstractControl, ValidatorFn} from '@angular/forms';
  */
 export abstract class DecimalFactory extends BaseValidatorFactory {
 
-  createValidator(config: DecimalValidatorConfig): ValdrValidationFn {
+  createValidator(config: DecimalValidatorConfig): ValdrValidatorFn {
     return (control: AbstractControl): ValdrValidationErrors | null => {
       if (config.inclusive) {
         return this.handleInclusive(config, control);
@@ -32,7 +32,7 @@ export abstract class DecimalFactory extends BaseValidatorFactory {
    */
   abstract getMainValidator(value: number): ValidatorFn;
 
-  private handleExclusive(config: any, control: AbstractControl): ValdrValidationErrors | null {
+  private handleExclusive(config: DecimalValidatorConfig, control: AbstractControl): ValdrValidationErrors | null {
     if (!control.value || isNaN(control.value)) {
       return null;
     }
@@ -42,7 +42,7 @@ export abstract class DecimalFactory extends BaseValidatorFactory {
     return this.getValidationErrors(config);
   }
 
-  private handleInclusive(config: any, control: AbstractControl) {
+  private handleInclusive(config: DecimalValidatorConfig, control: AbstractControl) {
     if (!this.getMainValidator(config.value)(control)) {
       return null;
     }
