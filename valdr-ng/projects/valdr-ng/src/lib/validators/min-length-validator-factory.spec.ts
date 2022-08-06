@@ -1,5 +1,5 @@
 import {ValdrValidatorFn} from '../model';
-import {UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {MinLengthValidatorFactory} from "./min-length-validator-factory";
 
 describe('MinLengthValidatorFactory', () => {
@@ -36,7 +36,7 @@ describe('MinLengthValidatorFactory', () => {
 
       it('should return null for value longer than 4', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl('asd123');
+        const control: FormControl = new FormControl('asd123');
 
         // when
         const result = validator!(control);
@@ -47,7 +47,7 @@ describe('MinLengthValidatorFactory', () => {
 
       it('should return error for value shorter than 4', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl('asd');
+        const control: FormControl = new FormControl('asd');
 
         // when
         const result = validator!(control);

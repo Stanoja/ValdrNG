@@ -1,14 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
 import {
+  CustomValidators,
   ModelType,
   ValdrConstraints,
   ValdrModelConstraints,
   ValdrValidationErrors,
-  ValdrValidatorFn,
-  CustomValidators
+  ValdrValidatorFn
 } from './model';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
-import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ValidatorFn} from '@angular/forms';
 
 /**
  * Main ValdrNG service.
@@ -30,7 +30,7 @@ export class ValdrNgService {
 
   private constraints: ValdrConstraints = {};
 
-  private validatorsPerField: {[key: string]: BaseValidatorFactory} = {};
+  private validatorsPerField: { [key: string]: BaseValidatorFactory } = {};
 
   constructor(@Inject(BaseValidatorFactory) factories: BaseValidatorFactory[]) {
     factories.forEach(factory => this.validatorsPerField[factory.getConstraintName()] = factory);
@@ -62,11 +62,11 @@ export class ValdrNgService {
    * @param typeName the type name
    * @param additionalValidators additional validators per field
    */
-  createFormGroupControls<M extends ModelType = ModelType>(model: M,
-                                                           typeName: string,
-                                                           additionalValidators?: CustomValidators<M>) {
+  createFormGroupControls<M>(model: ModelType<M>,
+                             typeName: string,
+                             additionalValidators?: CustomValidators<M>) {
     const typeConstraints = this.getTypeConstraints<M>(typeName);
-    const controls: {[k in keyof M]?: any} = {};
+    const controls: {[k in keyof M]?: [M[k]] | [M[k], ValidatorFn[]]} = {};
     for (const field in model) {
       controls[field] = [model[field]];
     }
@@ -76,7 +76,7 @@ export class ValdrNgService {
     if (additionalValidators) {
       for (const field in additionalValidators) {
         if (controls[field]) {
-          controls[field][1] = [...(controls[field][1] ?? []), ...additionalValidators[field]];
+          controls[field]![1] = [...(controls[field]![1] ?? []), ...additionalValidators[field]];
         } else {
           throw new Error(`No model value provided for custom validator on field '${field}'.`);
         }

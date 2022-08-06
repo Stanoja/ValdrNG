@@ -1,5 +1,5 @@
 import {RequiredValidatorFactory} from './required-validator-factory';
-import {UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {ValdrValidatorFn} from '../model';
 
 describe('RequiredValidatorHandler', () => {
@@ -32,7 +32,7 @@ describe('RequiredValidatorHandler', () => {
 
       it('should not add message on valid required', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl();
+        const control: FormControl = new FormControl();
         control.setValue('Some value');
 
         // when
@@ -44,7 +44,7 @@ describe('RequiredValidatorHandler', () => {
 
       it('should add message on valid required', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl();
+        const control: FormControl = new FormControl();
 
         // when
         const result = validator!(control);

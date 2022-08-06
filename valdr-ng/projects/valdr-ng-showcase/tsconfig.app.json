@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
     "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
     "types": []
   },
   "files": [

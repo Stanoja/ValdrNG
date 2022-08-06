@@ -1,6 +1,6 @@
 import {PatternValidatorFactory} from './pattern-validator-factory';
 import {ValdrValidatorFn} from '../model';
-import {UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 
 describe('PatternValidatorFactory', () => {
 
@@ -36,7 +36,7 @@ describe('PatternValidatorFactory', () => {
 
       it('should not add message on valid pattern', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl();
+        const control: FormControl = new FormControl();
         control.setValue('Some value');
 
         // when
@@ -48,7 +48,7 @@ describe('PatternValidatorFactory', () => {
 
       it('should add message on invalid pattern', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl('123!@#@');
+        const control: FormControl = new FormControl('123!@#@');
 
         // when
         const result = validator!(control);

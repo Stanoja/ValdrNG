@@ -1,6 +1,6 @@
 import {MaxLengthValidatorFactory} from './max-length-validator-factory';
 import {ValdrValidatorFn} from '../model';
-import {UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 
 describe('MaxLengthValidatorFactory', () => {
 
@@ -36,7 +36,7 @@ describe('MaxLengthValidatorFactory', () => {
 
       it('should return null for value shorter than 4', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl('asd');
+        const control: FormControl = new FormControl('asd');
 
         // when
         const result = validator!(control);
@@ -47,7 +47,7 @@ describe('MaxLengthValidatorFactory', () => {
 
       it('should return error for value longer than 4', () => {
         // given
-        const control: UntypedFormControl = new UntypedFormControl('asd1234');
+        const control: FormControl = new FormControl('asd1234');
 
         // when
         const result = validator!(control);

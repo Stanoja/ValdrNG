@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Person} from './model/person';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'valdr-ng-showcase';
 
-  person = {
+  person: Person = {
     firstName: 'John',
     username: '',
     email: '',

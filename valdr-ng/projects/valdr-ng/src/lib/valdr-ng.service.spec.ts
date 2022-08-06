@@ -122,7 +122,7 @@ describe('ValdrNgService', () => {
         firstName: jasmine.arrayContaining([model.firstName, jasmine.any(Array)]),
         secondName: jasmine.arrayContaining([model.secondName])
       }));
-      expect((formGroup.secondName.length)).toBe(1);
+      expect((formGroup.secondName!.length)).toBe(1);
     });
 
     it('should create additional constraints for fields which are not present in the model', () => {
