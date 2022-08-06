@@ -8,7 +8,7 @@ import {
   CustomValidators
 } from './model';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 
 /**
  * Main ValdrNG service.
@@ -91,7 +91,7 @@ export class ValdrNgService {
    * @param formGroup the form group
    * @param typeName the type name
    */
-  addValidators(formGroup: FormGroup, typeName: string): void {
+  addValidators(formGroup: UntypedFormGroup, typeName: string): void {
     const typeConstraints = this.getTypeConstraints<any>(typeName);
     Object.entries(formGroup.controls).forEach(([controlName, control]) => {
       const fieldConstraints = typeConstraints[controlName];
@@ -131,7 +131,7 @@ export class ValdrNgService {
    * @return null or validation errors
    */
   public validate(typeName: string, filedName: string, value: any): ValdrValidationErrors | null {
-    const control = new FormControl(value, this.getValidatorsForField(typeName, filedName));
+    const control = new UntypedFormControl(value, this.getValidatorsForField(typeName, filedName));
     return control.errors;
   }
 

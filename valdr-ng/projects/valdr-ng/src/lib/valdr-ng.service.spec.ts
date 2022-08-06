@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {ValdrNgService} from './valdr-ng.service';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, ValidatorFn} from '@angular/forms';
 import {BaseValidatorFactory} from './validators/base-validator-factory';
 import {CustomValidators, ValdrValidatorFn} from './model';
 import {SizeValidatorFactory} from './validators/size-validator-factory';
@@ -195,7 +195,7 @@ describe('ValdrNgService', () => {
   });
 
   describe('addValidatorsToFormGroupControls', () => {
-    let formGroup: FormGroup | null = null;
+    let formGroup: UntypedFormGroup | null = null;
 
     beforeEach(() => {
       const formGroupControls = {
@@ -203,7 +203,7 @@ describe('ValdrNgService', () => {
         lastName: ['Last name', () => {}],
         city: ['City', [() => {}]],
       };
-      formGroup = TestBed.inject(FormBuilder).group(formGroupControls);
+      formGroup = TestBed.inject(UntypedFormBuilder).group(formGroupControls);
     });
 
     afterAll(() => {
@@ -274,7 +274,7 @@ describe('ValdrNgService', () => {
     });
 
     function expectRequiredValidator(validator: ValidatorFn) {
-      const control = new FormControl('');
+      const control = new UntypedFormControl('');
       expect(validator(control)).toEqual(jasmine.objectContaining({
         required: {
           message: jasmine.stringContaining('is required')

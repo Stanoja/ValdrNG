@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-simple-form',
@@ -11,9 +11,9 @@ export class SimpleFormComponent implements OnInit {
 
   @Input() person: any;
 
-  personForm!: FormGroup;
+  personForm!: UntypedFormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
   }
 
   ngOnInit(): void {

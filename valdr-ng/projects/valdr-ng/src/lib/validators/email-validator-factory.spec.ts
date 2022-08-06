@@ -1,5 +1,5 @@
 import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {EmailValidatorFactory} from './email-validator-factory';
 
 describe('EmailValidatorFactory', () => {
@@ -33,7 +33,7 @@ describe('EmailValidatorFactory', () => {
 
       it('should return null on valid email', () => {
         // given
-        const control: FormControl = new FormControl('qqq@myemail.com');
+        const control: UntypedFormControl = new UntypedFormControl('qqq@myemail.com');
 
         // when
         const result = validator!(control);
@@ -44,7 +44,7 @@ describe('EmailValidatorFactory', () => {
 
       it('should return validation result on invalid email', () => {
         // given
-        const control: FormControl = new FormControl('asd');
+        const control: UntypedFormControl = new UntypedFormControl('asd');
 
         // when
         const result = validator!(control);

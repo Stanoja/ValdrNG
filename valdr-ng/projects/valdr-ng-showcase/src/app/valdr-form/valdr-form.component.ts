@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ValdrNgService} from '../../../../valdr-ng/src/lib/valdr-ng.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-valdr-form',
@@ -10,10 +10,10 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class ValdrFormComponent implements OnInit {
 
   @Input() person: any;
-  personForm!: FormGroup;
+  personForm!: UntypedFormGroup;
 
   constructor(private valdrNgService: ValdrNgService,
-              private fb: FormBuilder) { }
+              private fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');

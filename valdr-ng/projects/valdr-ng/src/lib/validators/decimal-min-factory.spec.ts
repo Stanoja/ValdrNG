@@ -1,5 +1,5 @@
 import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {DecimalMinFactory} from './decimal-min-factory';
 
 describe('DecimalMinFactory', () => {
@@ -38,7 +38,7 @@ describe('DecimalMinFactory', () => {
 
       it('should not add message on greater value', () => {
         // given
-        const control: FormControl = new FormControl(11);
+        const control: UntypedFormControl = new UntypedFormControl(11);
 
         // when
         const result = validator!(control);
@@ -49,7 +49,7 @@ describe('DecimalMinFactory', () => {
 
       it('should add message on equal value', () => {
         // given
-        const control: FormControl = new FormControl('10');
+        const control: UntypedFormControl = new UntypedFormControl('10');
 
         // when
         const result = validator!(control);
@@ -79,7 +79,7 @@ describe('DecimalMinFactory', () => {
 
       it('should not add message on valid value', () => {
         // given
-        const control: FormControl = new FormControl(21);
+        const control: UntypedFormControl = new UntypedFormControl(21);
 
         // when
         const result = validator!(control);
@@ -90,7 +90,7 @@ describe('DecimalMinFactory', () => {
 
       it('should add message on equal value', () => {
         // given
-        const control: FormControl = new FormControl('20');
+        const control: UntypedFormControl = new UntypedFormControl('20');
 
         // when
         const result = validator!(control);

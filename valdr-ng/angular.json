@@ -143,5 +143,7 @@
       }
     }
   },
-  "defaultProject": "valdr-ng"
+  "cli": {
+    "analytics": false
+  }
 }

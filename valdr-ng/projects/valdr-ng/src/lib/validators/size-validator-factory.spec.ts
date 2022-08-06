@@ -1,6 +1,6 @@
 import {SizeValidatorFactory} from './size-validator-factory';
 import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 describe('SizeValidatorFactory', () => {
   let sizeValidatorHandler: SizeValidatorFactory | null;
@@ -39,7 +39,7 @@ describe('SizeValidatorFactory', () => {
 
       it('should not add message on valid min', () => {
         // given
-        const control = new FormControl();
+        const control = new UntypedFormControl();
         control.setValue('Longer value');
 
         // when
@@ -51,7 +51,7 @@ describe('SizeValidatorFactory', () => {
 
       it('should add message on invalid min', () => {
         // given
-        const control = new FormControl();
+        const control = new UntypedFormControl();
         control.setValue('a');
 
         // when
@@ -78,7 +78,7 @@ describe('SizeValidatorFactory', () => {
 
       it('should not add message on valid min', () => {
         // given
-        const control = new FormControl();
+        const control = new UntypedFormControl();
         control.setValue('Short');
 
         // when
@@ -90,7 +90,7 @@ describe('SizeValidatorFactory', () => {
 
       it('should fallback to 0 if min is not specified', () => {
         // given
-        const control = new FormControl();
+        const control = new UntypedFormControl();
         control.setValue('Longer than 10');
 
         // when

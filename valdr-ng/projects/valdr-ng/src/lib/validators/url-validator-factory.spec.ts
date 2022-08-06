@@ -1,5 +1,5 @@
 import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {MinLengthValidatorFactory} from "./min-length-validator-factory";
 import {UrlValidatorFactory} from "./url-validator-factory";
 
@@ -33,21 +33,21 @@ describe('MinLengthValidatorFactory', () => {
 
       it('should return null for null or empty value', () => {
         // given / when / then
-        expect(validator!(new FormControl())).toBeNull();
-        expect(validator!(new FormControl(''))).toBeNull();
+        expect(validator!(new UntypedFormControl())).toBeNull();
+        expect(validator!(new UntypedFormControl(''))).toBeNull();
       });
 
       it('should return null for valid url', () => {
         // given / when / then
-        expect(validator!(new FormControl('http://tase.com'))).toBeNull();
-        expect(validator!(new FormControl('https://tase.com.qq'))).toBeNull();
-        expect(validator!(new FormControl('http://127.0.0.1'))).toBeNull();
-        expect(validator!(new FormControl('ftp://tase'))).toBeNull();
+        expect(validator!(new UntypedFormControl('http://tase.com'))).toBeNull();
+        expect(validator!(new UntypedFormControl('https://tase.com.qq'))).toBeNull();
+        expect(validator!(new UntypedFormControl('http://127.0.0.1'))).toBeNull();
+        expect(validator!(new UntypedFormControl('ftp://tase'))).toBeNull();
       });
 
       it('should return error for invalid url', () => {
         // given / when
-        const result = validator!(new FormControl('invalid url'));
+        const result = validator!(new UntypedFormControl('invalid url'));
 
         // then
         expect(result).toEqual(jasmine.objectContaining({
