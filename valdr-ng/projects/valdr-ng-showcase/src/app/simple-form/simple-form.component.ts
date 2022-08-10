@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {Person} from '../model/person';
 
 @Component({
   selector: 'app-simple-form',
@@ -9,7 +10,7 @@ import {FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 export class SimpleFormComponent implements OnInit {
   private readonly myUrlRegex = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@\-\/]))?$/;
 
-  @Input() person: any;
+  @Input() person: Person;
 
   personForm!: FormGroup;
 

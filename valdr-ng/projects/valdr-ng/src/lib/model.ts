@@ -99,7 +99,7 @@ export type ValdrModelConstraints<DomainDto, C extends BaseValidatorConfig, T ex
  * Valdr configuration object, typically produced by parsing the constraints.json file from the backend.
  */
 export interface ValdrConstraints {
-  [type: string]: ValdrModelConstraints<ModelType, any, BuiltInValidators>;
+  [type: string]: ValdrModelConstraints<Record<string, any>, any, BuiltInValidators>;
 }
 
 /**
@@ -120,4 +120,6 @@ export type CustomValidators<Type> = {[field in keyof Partial<Type>]: ValdrValid
 /**
  * Generic model type.
  */
-export type ModelType = {[k: string]: any}
+export type ModelType<M extends Record<string, any>> = {
+  [K in keyof M]: M[K];
+};
