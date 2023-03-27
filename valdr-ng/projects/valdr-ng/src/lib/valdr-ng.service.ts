@@ -62,9 +62,9 @@ export class ValdrNgService {
    * @param typeName the type name
    * @param additionalValidators additional validators per field
    */
-  createFormGroupControls<M>(model: ModelType<M>,
-                             typeName: string,
-                             additionalValidators?: CustomValidators<M>) {
+  createFormGroupControls<M extends Record<string, any>>(model: ModelType<M>,
+                                                         typeName: string,
+                                                         additionalValidators?: CustomValidators<M>) {
     const typeConstraints = this.getTypeConstraints<M>(typeName);
     const controls: {[k in keyof M]?: [M[k]] | [M[k], ValidatorFn[]]} = {};
     for (const field in model) {
