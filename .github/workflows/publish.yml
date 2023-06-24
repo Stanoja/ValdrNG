@@ -1,0 +1,26 @@
+name: Test and Publish
+
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.16.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+      - run: npm i
+        working-directory: ./valdr-ng
+      - name: Build Showcase
+        run: npm run build-valdr-ng-showcase
+        working-directory: ./valdr-ng
+      - name: Publish Showcase
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        working-directory: ./valdr-ng/dist/valdr-ng-showcase
+        run: npm run ng -- deploy valdr-ng-showcase --base-href=https://stanoja.github.io
