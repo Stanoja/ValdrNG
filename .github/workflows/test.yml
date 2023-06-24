@@ -17,4 +17,6 @@ jobs:
         with:
           node-version: '18.16.0'
       - run: npm i
+        working-directory: ./valdr-ng
       - run: npm test
+        working-directory: ./valdr-ng
