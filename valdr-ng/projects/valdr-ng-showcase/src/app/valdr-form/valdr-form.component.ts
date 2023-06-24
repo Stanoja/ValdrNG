@@ -14,10 +14,12 @@ export class ValdrFormComponent implements OnInit {
   personForm!: FormGroup;
 
   constructor(private valdrNgService: ValdrNgService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder) {
+    this.person = {} as any;
+  }
 
   ngOnInit(): void {
-    const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');
+    const controls = this.valdrNgService.createFormGroupControls(this.person!, 'Person');
     this.personForm = this.fb.group(controls);
 
     // This shows how one can use valdrNg to directly validate a value without using a form.

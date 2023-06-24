@@ -8,7 +8,8 @@
     "build-valdr-ng": "ng build valdr-ng",
     "build-valrd-ng-showcase": "ng build valdr-ng-showcase",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --browsers ChromeHeadless --watch=false",
+    "test-local": "ng test"
   },
   "private": true,
   "dependencies": {

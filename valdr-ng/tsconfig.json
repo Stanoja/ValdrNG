@@ -28,6 +28,8 @@
         "dist/valdr-ng"
       ]
     },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
