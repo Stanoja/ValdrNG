@@ -14,7 +14,7 @@ import { Person } from '../model/person';
 })
 export class SimpleFormComponent implements OnInit {
   private readonly myUrlRegex =
-    /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@\-\/]))?$/;
+    /^(ftp|http|https):\/\/(\w+:?\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@\-\/]))?$/;
 
   @Input() person: Person;
 
