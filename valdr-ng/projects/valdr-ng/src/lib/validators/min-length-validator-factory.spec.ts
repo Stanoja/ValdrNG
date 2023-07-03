@@ -1,14 +1,15 @@
-import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
-import {MinLengthValidatorFactory} from "./min-length-validator-factory";
+import { ValdrValidatorFn } from '../model';
+import { FormControl } from '@angular/forms';
+import { MinLengthValidatorFactory } from './min-length-validator-factory';
 
 describe('MinLengthValidatorFactory', () => {
-
   let minLengthValidatorHandler: MinLengthValidatorFactory | null;
 
-  beforeEach(() => minLengthValidatorHandler = new MinLengthValidatorFactory());
+  beforeEach(
+    () => (minLengthValidatorHandler = new MinLengthValidatorFactory())
+  );
 
-  afterAll(() => minLengthValidatorHandler = null);
+  afterAll(() => (minLengthValidatorHandler = null));
 
   it('should get constraint name', () => {
     // given / when / then
@@ -18,8 +19,12 @@ describe('MinLengthValidatorFactory', () => {
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(minLengthValidatorHandler?.createValidator({number: 4, message: 'Should be longer than 4.'}))
-        .toBeDefined();
+      expect(
+        minLengthValidatorHandler?.createValidator({
+          number: 4,
+          message: 'Should be longer than 4.',
+        })
+      ).toBeDefined();
     });
 
     describe('should validate properly', () => {
@@ -28,11 +33,11 @@ describe('MinLengthValidatorFactory', () => {
       beforeEach(() => {
         validator = minLengthValidatorHandler!.createValidator({
           number: 4,
-          message: 'Should be longer than 4.'
+          message: 'Should be longer than 4.',
         });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should return null for value longer than 4', () => {
         // given
@@ -53,14 +58,15 @@ describe('MinLengthValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          minLength: {
-            number: 4,
-            message: 'Should be longer than 4.'
-          }
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            minLength: {
+              number: 4,
+              message: 'Should be longer than 4.',
+            },
+          })
+        );
       });
-    })
-  })
-
+    });
+  });
 });

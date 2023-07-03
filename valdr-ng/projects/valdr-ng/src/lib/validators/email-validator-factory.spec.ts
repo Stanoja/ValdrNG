@@ -1,14 +1,13 @@
-import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
-import {EmailValidatorFactory} from './email-validator-factory';
+import { ValdrValidatorFn } from '../model';
+import { FormControl } from '@angular/forms';
+import { EmailValidatorFactory } from './email-validator-factory';
 
 describe('EmailValidatorFactory', () => {
-
   let emailValidatorFactory: EmailValidatorFactory | null;
 
-  beforeEach(() => emailValidatorFactory = new EmailValidatorFactory());
+  beforeEach(() => (emailValidatorFactory = new EmailValidatorFactory()));
 
-  afterAll(() => emailValidatorFactory = null);
+  afterAll(() => (emailValidatorFactory = null));
 
   it('should get constraint name', () => {
     // given / when / then
@@ -18,18 +17,23 @@ describe('EmailValidatorFactory', () => {
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(emailValidatorFactory?.createValidator({message: 'Should be valid email.'}))
-        .toBeDefined();
+      expect(
+        emailValidatorFactory?.createValidator({
+          message: 'Should be valid email.',
+        })
+      ).toBeDefined();
     });
 
     describe('should validate properly', () => {
       let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
-        validator = emailValidatorFactory!.createValidator({message: 'Should be valid email.'});
+        validator = emailValidatorFactory!.createValidator({
+          message: 'Should be valid email.',
+        });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should return null on valid email', () => {
         // given
@@ -50,12 +54,14 @@ describe('EmailValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          email: {
-            message: 'Should be valid email.'
-          }
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            email: {
+              message: 'Should be valid email.',
+            },
+          })
+        );
       });
-    })
-  })
+    });
+  });
 });

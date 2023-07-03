@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors} from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 /**
  * Base validator config which includes the message field.
@@ -32,11 +32,13 @@ export interface DecimalValidatorConfig extends BaseValidatorConfig {
   value: number;
 }
 
-export interface DecimalMaxValidator extends BaseValidator<DecimalValidatorConfig> {
+export interface DecimalMaxValidator
+  extends BaseValidator<DecimalValidatorConfig> {
   max: DecimalValidatorConfig;
 }
 
-export interface DecimalMinValidator extends BaseValidator<DecimalValidatorConfig> {
+export interface DecimalMinValidator
+  extends BaseValidator<DecimalValidatorConfig> {
   min: DecimalValidatorConfig;
 }
 
@@ -44,11 +46,13 @@ export interface BaseLengthValidatorConfig extends BaseValidatorConfig {
   number: number;
 }
 
-export interface MaxLengthValidator extends BaseValidator<BaseLengthValidatorConfig> {
+export interface MaxLengthValidator
+  extends BaseValidator<BaseLengthValidatorConfig> {
   maxLength: BaseLengthValidatorConfig;
 }
 
-export interface MinLengthValidator extends BaseValidator<BaseLengthValidatorConfig> {
+export interface MinLengthValidator
+  extends BaseValidator<BaseLengthValidatorConfig> {
   minLength: BaseLengthValidatorConfig;
 }
 
@@ -60,8 +64,9 @@ export interface PatternValidatorConfig extends BaseValidatorConfig {
   value: string | RegExp;
 }
 
-export interface PatternValidator extends BaseValidator<PatternValidatorConfig> {
-  pattern: PatternValidatorConfig
+export interface PatternValidator
+  extends BaseValidator<PatternValidatorConfig> {
+  pattern: PatternValidatorConfig;
 }
 
 export interface SizeValidatorConfig extends BaseValidatorConfig {
@@ -84,14 +89,26 @@ export interface RequiredValidator extends BaseValidator<BaseValidatorConfig> {
 /**
  * Valdr provided validator types
  */
-export type BuiltInValidators = EmailValidator | PatternValidator | SizeValidator | RequiredValidator |
-  DecimalMaxValidator | DecimalMinValidator | MaxLengthValidator | MinLengthValidator | UrlValidator |
-  BaseValidator<BaseValidatorConfig>;
+export type BuiltInValidators =
+  | EmailValidator
+  | PatternValidator
+  | SizeValidator
+  | RequiredValidator
+  | DecimalMaxValidator
+  | DecimalMinValidator
+  | MaxLengthValidator
+  | MinLengthValidator
+  | UrlValidator
+  | BaseValidator<BaseValidatorConfig>;
 
 /**
  * Per model validation configuration.
  */
-export type ValdrModelConstraints<DomainDto, C extends BaseValidatorConfig, T extends BaseValidator<C>> = {
+export type ValdrModelConstraints<
+  DomainDto,
+  C extends BaseValidatorConfig,
+  T extends BaseValidator<C>
+> = {
   [field in keyof DomainDto]: T;
 };
 
@@ -99,7 +116,11 @@ export type ValdrModelConstraints<DomainDto, C extends BaseValidatorConfig, T ex
  * Valdr configuration object, typically produced by parsing the constraints.json file from the backend.
  */
 export interface ValdrConstraints {
-  [type: string]: ValdrModelConstraints<Record<string, any>, any, BuiltInValidators>;
+  [type: string]: ValdrModelConstraints<
+    Record<string, any>,
+    any,
+    BuiltInValidators
+  >;
 }
 
 /**
@@ -110,12 +131,16 @@ export type ValdrValidationErrors = ValidationErrors & { message?: string };
 /**
  * The valdr generated angular forms validators.
  */
-export type ValdrValidatorFn = (control: AbstractControl) => ValdrValidationErrors | null;
+export type ValdrValidatorFn = (
+  control: AbstractControl
+) => ValdrValidationErrors | null;
 
 /**
  * Additional custom validators for a model. field refers to the field name in the model.
  */
-export type CustomValidators<Type> = {[field in keyof Partial<Type>]: ValdrValidatorFn[] };
+export type CustomValidators<Type> = {
+  [field in keyof Partial<Type>]: ValdrValidatorFn[];
+};
 
 /**
  * Generic model type.

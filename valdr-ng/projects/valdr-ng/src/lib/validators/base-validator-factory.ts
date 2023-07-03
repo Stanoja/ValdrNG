@@ -5,7 +5,6 @@ import { ValdrValidatorFn } from '../model';
  * can work with the given configuration.
  */
 export abstract class BaseValidatorFactory {
-
   /**
    * Returns the field which the current validator factory can handle.
    *
