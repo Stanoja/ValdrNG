@@ -20,8 +20,7 @@ export class SimpleFormComponent implements OnInit {
 
   personForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.personForm = this.fb.group({

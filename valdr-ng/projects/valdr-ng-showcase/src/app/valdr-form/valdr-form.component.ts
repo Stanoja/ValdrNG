@@ -12,8 +12,10 @@ export class ValdrFormComponent implements OnInit {
   @Input() person: Person;
   personForm!: FormGroup;
 
-  constructor(private valdrNgService: ValdrNgService, private fb: FormBuilder) {
-  }
+  constructor(
+    private valdrNgService: ValdrNgService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     const controls = this.valdrNgService.createFormGroupControls(
