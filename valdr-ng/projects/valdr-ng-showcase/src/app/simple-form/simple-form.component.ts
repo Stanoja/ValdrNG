@@ -21,7 +21,6 @@ export class SimpleFormComponent implements OnInit {
   personForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.person = {} as any;
   }
 
   ngOnInit(): void {

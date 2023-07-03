@@ -13,7 +13,6 @@ export class ValdrFormComponent implements OnInit {
   personForm!: FormGroup;
 
   constructor(private valdrNgService: ValdrNgService, private fb: FormBuilder) {
-    this.person = {} as any;
   }
 
   ngOnInit(): void {
