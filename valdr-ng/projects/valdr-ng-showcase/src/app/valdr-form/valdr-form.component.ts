@@ -15,7 +15,6 @@ export class ValdrFormComponent implements OnInit {
 
   constructor(private valdrNgService: ValdrNgService,
               private fb: FormBuilder) {
-    this.person = {} as any;
   }
 
   ngOnInit(): void {
