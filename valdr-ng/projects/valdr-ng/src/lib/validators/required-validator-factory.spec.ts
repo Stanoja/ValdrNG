@@ -1,13 +1,13 @@
-import {RequiredValidatorFactory} from './required-validator-factory';
-import {FormControl} from '@angular/forms';
-import {ValdrValidatorFn} from '../model';
+import { RequiredValidatorFactory } from './required-validator-factory';
+import { FormControl } from '@angular/forms';
+import { ValdrValidatorFn } from '../model';
 
 describe('RequiredValidatorHandler', () => {
   let requiredValidatorHandler: RequiredValidatorFactory | null;
 
-  beforeEach(() => requiredValidatorHandler = new RequiredValidatorFactory());
+  beforeEach(() => (requiredValidatorHandler = new RequiredValidatorFactory()));
 
-  afterAll(() => requiredValidatorHandler = null);
+  afterAll(() => (requiredValidatorHandler = null));
 
   it('should get constraint name', () => {
     // given / when / then
@@ -17,18 +17,23 @@ describe('RequiredValidatorHandler', () => {
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(requiredValidatorHandler?.createValidator({message: 'This field is required.'}))
-        .toBeDefined();
+      expect(
+        requiredValidatorHandler?.createValidator({
+          message: 'This field is required.',
+        })
+      ).toBeDefined();
     });
 
     describe('should validate properly', () => {
       let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
-        validator = requiredValidatorHandler!.createValidator({message: 'This field is required.'});
+        validator = requiredValidatorHandler!.createValidator({
+          message: 'This field is required.',
+        });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should not add message on valid required', () => {
         // given
@@ -50,12 +55,14 @@ describe('RequiredValidatorHandler', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          required: {
-            message: 'This field is required.'
-          }
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            required: {
+              message: 'This field is required.',
+            },
+          })
+        );
       });
-    })
+    });
   });
 });

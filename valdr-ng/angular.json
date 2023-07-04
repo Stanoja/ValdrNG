@@ -66,9 +66,7 @@
               "projects/valdr-ng-showcase/src/favicon.ico",
               "projects/valdr-ng-showcase/src/assets"
             ],
-            "styles": [
-              "projects/valdr-ng-showcase/src/styles.scss"
-            ],
+            "styles": ["projects/valdr-ng-showcase/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -134,9 +132,7 @@
               "projects/valdr-ng-showcase/src/favicon.ico",
               "projects/valdr-ng-showcase/src/assets"
             ],
-            "styles": [
-              "projects/valdr-ng-showcase/src/styles.scss"
-            ],
+            "styles": ["projects/valdr-ng-showcase/src/styles.scss"],
             "scripts": []
           }
         },

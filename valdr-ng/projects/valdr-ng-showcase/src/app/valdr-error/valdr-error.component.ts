@@ -1,13 +1,12 @@
-import {Component, Input} from '@angular/core';
-import {AbstractControl} from "@angular/forms";
+import { Component, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-valdr-error',
   templateUrl: './valdr-error.component.html',
-  styleUrls: ['./valdr-error.component.scss']
+  styleUrls: ['./valdr-error.component.scss'],
 })
 export class ValdrErrorComponent {
-
   @Input() control: AbstractControl | null = null;
 
   isInvalid(): boolean {

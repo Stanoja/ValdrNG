@@ -1,4 +1,3 @@
-
 /** Model for Person. */
 export interface Person {
   firstName: string;
