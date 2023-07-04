@@ -1,14 +1,13 @@
-import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
-import {DecimalMinFactory} from './decimal-min-factory';
+import { ValdrValidatorFn } from '../model';
+import { FormControl } from '@angular/forms';
+import { DecimalMinFactory } from './decimal-min-factory';
 
 describe('DecimalMinFactory', () => {
-
   let decimalMinFactory: DecimalMinFactory | null;
 
-  beforeEach(() => decimalMinFactory = new DecimalMinFactory());
+  beforeEach(() => (decimalMinFactory = new DecimalMinFactory()));
 
-  afterAll(() => decimalMinFactory = null);
+  afterAll(() => (decimalMinFactory = null));
 
   it('should get constraint name', () => {
     // given / when / then
@@ -18,10 +17,12 @@ describe('DecimalMinFactory', () => {
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(decimalMinFactory?.createValidator({
-        value: 10,
-        message: 'Should be greater than 10.'
-      })).toBeDefined();
+      expect(
+        decimalMinFactory?.createValidator({
+          value: 10,
+          message: 'Should be greater than 10.',
+        })
+      ).toBeDefined();
     });
 
     describe('should validate inclusive properly', () => {
@@ -30,11 +31,11 @@ describe('DecimalMinFactory', () => {
       beforeEach(() => {
         validator = decimalMinFactory!.createValidator({
           value: 10,
-          message: 'Should be greater than 10.'
+          message: 'Should be greater than 10.',
         });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should not add message on greater value', () => {
         // given
@@ -55,14 +56,16 @@ describe('DecimalMinFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          min: {
-            value: 10,
-            message: 'Should be greater than 10.'
-          }
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            min: {
+              value: 10,
+              message: 'Should be greater than 10.',
+            },
+          })
+        );
       });
-    })
+    });
 
     describe('should validate exclusive properly', () => {
       let validator: ValdrValidatorFn | null = {} as any;
@@ -71,11 +74,11 @@ describe('DecimalMinFactory', () => {
         validator = decimalMinFactory!.createValidator({
           value: 20,
           message: 'Should be greater than 20.',
-          inclusive: false
+          inclusive: false,
         });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should not add message on valid value', () => {
         // given
@@ -96,14 +99,15 @@ describe('DecimalMinFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          min: {
-            value: 20,
-            message: 'Should be greater than 20.'
-          }
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            min: {
+              value: 20,
+              message: 'Should be greater than 20.',
+            },
+          })
+        );
       });
-    })
-
-  })
+    });
+  });
 });

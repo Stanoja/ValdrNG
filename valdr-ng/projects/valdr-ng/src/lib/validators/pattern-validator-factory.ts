@@ -1,14 +1,17 @@
-import {BaseValidatorFactory} from './base-validator-factory';
-import {PatternValidatorConfig, ValdrValidationErrors, ValdrValidatorFn} from '../model';
-import {AbstractControl, Validators} from '@angular/forms';
-import {Injectable} from '@angular/core';
+import { BaseValidatorFactory } from './base-validator-factory';
+import {
+  PatternValidatorConfig,
+  ValdrValidationErrors,
+  ValdrValidatorFn,
+} from '../model';
+import { AbstractControl, Validators } from '@angular/forms';
+import { Injectable } from '@angular/core';
 
 /**
  * Handles {@link Validators.pattern}.
  */
 @Injectable()
 export class PatternValidatorFactory extends BaseValidatorFactory {
-
   getConstraintName(): string {
     return 'pattern';
   }
@@ -21,7 +24,6 @@ export class PatternValidatorFactory extends BaseValidatorFactory {
       }
       result['pattern'].message = config.message;
       return result;
-    }
+    };
   }
-
 }

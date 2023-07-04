@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
-import {Person} from './model/person';
+import { Component } from '@angular/core';
+import { Person } from './model/person';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'valdr-ng-showcase';
@@ -16,7 +16,6 @@ export class AppComponent {
     age: null,
     homepage: null,
     addressLine1: 'My Address',
-    myValue: ''
+    myValue: '',
   };
-
 }

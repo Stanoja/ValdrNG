@@ -12,20 +12,24 @@ useful when working with large and complex forms.
 
 Very similar to [Valdr for AngularJS](https://github.com/netceteragroup/valdr),
 there are few more advantages to this:
-* Less form creation boilerplate
-* Possibility to generate the constraints from the models that are present on your back-end (see [valdr-bean-validation](https://github.com/netceteragroup/valdr-bean-validation) for Java)
-* Compliant with [Angular Reactive Forms](https://angular.io/guide/reactive-forms)
-* Easy extension with custom validators
+
+- Less form creation boilerplate
+- Possibility to generate the constraints from the models that are present on your back-end (see [valdr-bean-validation](https://github.com/netceteragroup/valdr-bean-validation) for Java)
+- Compliant with [Angular Reactive Forms](https://angular.io/guide/reactive-forms)
+- Easy extension with custom validators
 
 ## Getting started
 
 1. Install `ValdrNg`
 
 #### [NPM](http://www.npmjs.com)
+
 ```bash
 npm i valdr-ng
 ```
+
 #### [Yarn](https://yarnpkg.com/)
+
 ```bash
 yarn install valdr-ng
 ```
@@ -34,12 +38,9 @@ yarn install valdr-ng
 
 ```typescript
 @NgModule({
-  imports: [
-    ValdrNgModule
-  ]
+  imports: [ValdrNgModule],
 })
-export class AppModule {
-}
+export class AppModule {}
 ```
 
 3. Set the constraints
@@ -48,24 +49,25 @@ export class AppModule {
 export class AppModule {
   constructor(private valdrNgService: ValdrNgService) {
     valdrNgService.setConstraints({
-      'Person': {
-        'firstName': {
-          'required': {
-            'message': 'First name is required.'
+      Person: {
+        firstName: {
+          required: {
+            message: 'First name is required.',
           },
-          'size': {
-            'min': 2,
-            'max': 20,
-            'message': 'First name must be between 2 and 20 characters.'
-          }
+          size: {
+            min: 2,
+            max: 20,
+            message: 'First name must be between 2 and 20 characters.',
+          },
         },
-        'username': {
-          'pattern': {
-            'value': '[a-zA-Z]{4,}',
-            'message': 'Username must be longer than 4 characters and match \'a-zA-Z\'.'
-          }
-        }
-      }
+        username: {
+          pattern: {
+            value: '[a-zA-Z]{4,}',
+            message:
+              "Username must be longer than 4 characters and match 'a-zA-Z'.",
+          },
+        },
+      },
     });
   }
 }
@@ -81,19 +83,24 @@ class MyComponent implements OnInit {
 
   person = {
     firstName: 'John',
-    username: ''
+    username: '',
   };
 
-  constructor(private valdrNgService: ValdrNgService,
-              private fb: FormBuilder) { }
+  constructor(
+    private valdrNgService: ValdrNgService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    const controls = this.valdrNgService.createFormGroupControls(this.person, 'Person');
+    const controls = this.valdrNgService.createFormGroupControls(
+      this.person,
+      'Person'
+    );
     this.personForm = this.fb.group(controls);
   }
 }
-
 ```
+
 <br/>
     4.2. add validators to existing FormGroup:
 
@@ -103,16 +110,18 @@ class MyComponent implements OnInit {
 
   person = {
     firstName: 'John',
-    username: ''
+    username: '',
   };
 
-  constructor(private valdrNgService: ValdrNgService,
-              private fb: FormBuilder) { }
+  constructor(
+    private valdrNgService: ValdrNgService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     const controls = this.fb.group({
       firstName: [this.person.firstName],
-      username: [this.person.username, [Validators.required]]
+      username: [this.person.username, [Validators.required]],
     });
     this.personForm = this.fb.group(controls);
     this.valdrNgService.addValidators(this.personForm, 'Person');
@@ -125,24 +134,23 @@ class MyComponent implements OnInit {
 ```html
 <form [formGroup]="personForm">
   <label for="firstName">First name:</label>
-  <input id="firstName" formControlName="firstName">
+  <input id="firstName" formControlName="firstName" />
 
   <!-- Simple error handling -->
   <div *ngIf="personForm.get('firstName')?.errors as err">
-    <p *ngIf="err['required'] as req">
-      {{req.message}}
-    </p>
+    <p *ngIf="err['required'] as req">{{req.message}}</p>
   </div>
 
   <label for="username">Username:</label>
-  <input id="username" formControlName="username">
+  <input id="username" formControlName="username" />
   <!-- Other error handling component  -->
 </form>
-
 ```
 
 ## Constraints JSON
+
 The JSON object which defines the validation rules has the following structure:
+
 ```json
 {
   "TypeName": {
@@ -152,14 +160,16 @@ The JSON object which defines the validation rules has the following structure:
   }
 }
 ```
-* **TypeName** - The type of the object
-* **FieldName** - The field name
-* **ValidatorName** - Name of the validator
-* **message** - The message which should be attached on the validation error
+
+- **TypeName** - The type of the object
+- **FieldName** - The field name
+- **ValidatorName** - Name of the validator
+- **message** - The message which should be attached on the validation error
 
 **Note:** The `ValidatorName` object can contain other validator arguments besides `message`.
 
 ### Example:
+
 ```json
 {
   "Person": {
@@ -186,14 +196,15 @@ The JSON object which defines the validation rules has the following structure:
 ## Validators
 
 Built-in validators:
-* **size**
-* **min**
-* **max**
-* **minLength**
-* **maxLength**
-* **email**
-* **pattern**
-* **url**
+
+- **size**
+- **min**
+- **max**
+- **minLength**
+- **maxLength**
+- **email**
+- **pattern**
+- **url**
 
 **NOTE:** For more details on the built-in validators see [the Built-in validators section below](#built-in-validators).
 
@@ -208,17 +219,22 @@ class MyValidator extends BaseValidatorFactory {
     return 'validByValue';
   }
 
-  createValidator(config: {value: string, message: string}): ValdrValidationFn {
-    const validateFn = ({value}: AbstractControl): ValidationErrors | null => {
+  createValidator(config: {
+    value: string;
+    message: string;
+  }): ValdrValidationFn {
+    const validateFn = ({
+      value,
+    }: AbstractControl): ValidationErrors | null => {
       if (value === null || value === config.value) {
         return null;
       }
       return {
         [this.getConstraintName()]: {
-          message: config.message
-        }
+          message: config.message,
+        },
       };
-    }
+    };
     return validateFn;
   }
 }
@@ -226,33 +242,24 @@ class MyValidator extends BaseValidatorFactory {
 
 2. Register it in `ValdrNgModule` or `ValdrNgService`:
 
-  - In the module
+- In the module
 
 ```typescript
 @NgModule({
-  imports: [
-    ValdrNgModule.forRoot([MyValidator])
-  ]
+  imports: [ValdrNgModule.forRoot([MyValidator])],
 })
-export class AppModule {
-}
+export class AppModule {}
 ```
 
 - Directly in the service
 
 ```typescript
-
 @NgModule({
-  imports: [
-    ValdrNgModule
-  ],
-  providers: [
-    MyValidator
-  ]
+  imports: [ValdrNgModule],
+  providers: [MyValidator],
 })
 export class AppModule {
-  constructor(valdrNgService: ValdrNgService,
-              myValidator: MyValidator) {
+  constructor(valdrNgService: ValdrNgService, myValidator: MyValidator) {
     valdrNgService.addValidatorFactories([myValidator]);
   }
 }
@@ -262,37 +269,35 @@ export class AppModule {
 
 ```typescript
 export class AppModule {
-  constructor(valdrNgService: ValdrNgService,
-              myValidator: MyValidator) {
+  constructor(valdrNgService: ValdrNgService, myValidator: MyValidator) {
     valdrNgService.addValidatorFactories([myValidator]);
     valdrNgService.setConstraints({
-      'Person': {
-        'password': {
-          'validByValue': {
-            'value': 'p455w0rd',
-            'message': 'Invalid password!'
-          }
-        }
-      }
+      Person: {
+        password: {
+          validByValue: {
+            value: 'p455w0rd',
+            message: 'Invalid password!',
+          },
+        },
+      },
     });
   }
 }
 ```
 
 ### How it is integrated with Angular Forms
+
 ValdrNG uses the provided [Angular validators](https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts)
 and wraps them by validator name, and returning the `message` along with the validation result.
 
 That makes couple of things easier:
-* Migration of the current forms to ValdrNG (validation result is extended)
-* Easily accessible a dedicated message for each field (see the usage)
 
-
-
+- Migration of the current forms to ValdrNG (validation result is extended)
+- Easily accessible a dedicated message for each field (see the usage)
 
 ### Built-in validators
 
-* **size** - Validates field size
+- **size** - Validates field size
 
 ```typescript
 {
@@ -304,7 +309,7 @@ That makes couple of things easier:
 }
 ```
 
-* **min** - Minimum numeric value
+- **min** - Minimum numeric value
 
 ```typescript
 {
@@ -315,7 +320,7 @@ That makes couple of things easier:
 }
 ```
 
-* **max** - Maximum numeric value
+- **max** - Maximum numeric value
 
 ```typescript
 {
@@ -326,7 +331,7 @@ That makes couple of things easier:
 }
 ```
 
-* **minLength** - Minimum length of a string
+- **minLength** - Minimum length of a string
 
 ```typescript
 {
@@ -337,7 +342,7 @@ That makes couple of things easier:
 }
 ```
 
-* **maxLength** - Maximum length of a string
+- **maxLength** - Maximum length of a string
 
 ```typescript
 {
@@ -348,7 +353,7 @@ That makes couple of things easier:
 }
 ```
 
-* **email** - Checks for valid e-mail.
+- **email** - Checks for valid e-mail.
 
 ```typescript
 {
@@ -358,7 +363,7 @@ That makes couple of things easier:
 }
 ```
 
-* **pattern** - Validates by the given pattern
+- **pattern** - Validates by the given pattern
 
 ```typescript
 {
@@ -369,7 +374,7 @@ That makes couple of things easier:
 }
 ```
 
-* **url** - Checks if the field has valid URL, currently supports urls starting with http, https & ftp.
+- **url** - Checks if the field has valid URL, currently supports urls starting with http, https & ftp.
 
 ```typescript
 {

@@ -1,13 +1,13 @@
-import {SizeValidatorFactory} from './size-validator-factory';
-import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
+import { SizeValidatorFactory } from './size-validator-factory';
+import { ValdrValidatorFn } from '../model';
+import { FormControl } from '@angular/forms';
 
 describe('SizeValidatorFactory', () => {
   let sizeValidatorHandler: SizeValidatorFactory | null;
 
-  beforeEach(() => sizeValidatorHandler = new SizeValidatorFactory());
+  beforeEach(() => (sizeValidatorHandler = new SizeValidatorFactory()));
 
-  afterAll(() => sizeValidatorHandler = null);
+  afterAll(() => (sizeValidatorHandler = null));
 
   it('should get constraint name', () => {
     // given / when / then
@@ -15,14 +15,15 @@ describe('SizeValidatorFactory', () => {
   });
 
   describe('createValidator', () => {
-
     it('should create the validator', () => {
       // given / when / then
-      expect(sizeValidatorHandler?.createValidator({
-        min: 5,
-        max: 10,
-        message: 'This field should be between 5 and 10.'
-      })).toBeDefined();
+      expect(
+        sizeValidatorHandler?.createValidator({
+          min: 5,
+          max: 10,
+          message: 'This field should be between 5 and 10.',
+        })
+      ).toBeDefined();
     });
 
     describe('should validate min properly', () => {
@@ -31,11 +32,11 @@ describe('SizeValidatorFactory', () => {
       beforeEach(() => {
         validator = sizeValidatorHandler!.createValidator({
           min: 5,
-          message: 'This field should be longer than 5.'
+          message: 'This field should be longer than 5.',
         });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should not add message on valid min', () => {
         // given
@@ -58,9 +59,13 @@ describe('SizeValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          minlength: jasmine.objectContaining({message: 'This field should be longer than 5.'})
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            minlength: jasmine.objectContaining({
+              message: 'This field should be longer than 5.',
+            }),
+          })
+        );
       });
     });
 
@@ -70,11 +75,11 @@ describe('SizeValidatorFactory', () => {
       beforeEach(() => {
         validator = sizeValidatorHandler!.createValidator({
           max: 10,
-          message: 'This field should be shorter than 10.'
+          message: 'This field should be shorter than 10.',
         });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should not add message on valid min', () => {
         // given
@@ -97,11 +102,14 @@ describe('SizeValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          maxlength: jasmine.objectContaining({message: 'This field should be shorter than 10.'})
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            maxlength: jasmine.objectContaining({
+              message: 'This field should be shorter than 10.',
+            }),
+          })
+        );
       });
     });
   });
-
 });
