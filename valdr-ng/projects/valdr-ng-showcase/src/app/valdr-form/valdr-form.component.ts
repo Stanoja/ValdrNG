@@ -28,7 +28,11 @@ export class ValdrFormComponent implements OnInit {
 
     // This shows how one can use valdrNg to directly validate a value without using a form.
     this.personForm.get('firstName')?.valueChanges.subscribe(name => {
-      this.output = JSON.stringify(this.valdrNgService.validate('Person', 'firstName', name), null, 2);
-    })
+      this.output = JSON.stringify(
+        this.valdrNgService.validate('Person', 'firstName', name),
+        null,
+        2
+      );
+    });
   }
 }
