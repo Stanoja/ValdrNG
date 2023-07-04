@@ -1,4 +1,4 @@
-<form [formGroup]="personForm">
+<form [formGroup]="personForm" id="demo-form">
   <label>First name:</label>
   <input formControlName="firstName" />
   <app-valdr-error [control]="this.personForm.get('firstName')">
@@ -30,8 +30,6 @@
   <label>My value: </label>
   <input formControlName="myValue" />
   <app-valdr-error [control]="this.personForm.get('myValue')"></app-valdr-error>
-  <p>
-    See the browsers console for a short demo of how manually calling the
-    validation can be achieved.
-  </p>
+  <p>First name manual validation result:</p>
+  <pre>{{output}}</pre>
 </form>
