@@ -6,6 +6,7 @@ import {
   ValdrNgService,
 } from '../../../../valdr-ng/src/public-api';
 import constraints from '../../assets/constraints.json';
+import { Person } from '../model/person';
 
 describe('ValdrFormComponent', () => {
   let component: ValdrFormComponent;
@@ -23,6 +24,7 @@ describe('ValdrFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ValdrFormComponent);
     component = fixture.componentInstance;
+    component.person = {} as Person;
     fixture.detectChanges();
   });
 
