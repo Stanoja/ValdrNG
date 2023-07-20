@@ -1,14 +1,13 @@
-import {PatternValidatorFactory} from './pattern-validator-factory';
-import {ValdrValidatorFn} from '../model';
-import {FormControl} from '@angular/forms';
+import { PatternValidatorFactory } from './pattern-validator-factory';
+import { ValdrValidatorFn } from '../model';
+import { FormControl } from '@angular/forms';
 
 describe('PatternValidatorFactory', () => {
-
   let patternValidatorHandler: PatternValidatorFactory | null;
 
-  beforeEach(() => patternValidatorHandler = new PatternValidatorFactory());
+  beforeEach(() => (patternValidatorHandler = new PatternValidatorFactory()));
 
-  afterAll(() => patternValidatorHandler = null);
+  afterAll(() => (patternValidatorHandler = null));
 
   it('should get constraint name', () => {
     // given / when / then
@@ -18,8 +17,12 @@ describe('PatternValidatorFactory', () => {
   describe('createValidator', () => {
     it('should create the validator', () => {
       // given / when / then
-      expect(patternValidatorHandler?.createValidator({value: '[a-zA-Z ]*', message: 'Should match /d/.'}))
-        .toBeDefined();
+      expect(
+        patternValidatorHandler?.createValidator({
+          value: '[a-zA-Z ]*',
+          message: 'Should match /d/.',
+        })
+      ).toBeDefined();
     });
 
     describe('should validate properly', () => {
@@ -28,11 +31,11 @@ describe('PatternValidatorFactory', () => {
       beforeEach(() => {
         validator = patternValidatorHandler!.createValidator({
           value: '[a-zA-Z ]*',
-          message: 'Should match \'[a-zA-Z ]*\'.'
+          message: "Should match '[a-zA-Z ]*'.",
         });
       });
 
-      afterAll(() => validator = null);
+      afterAll(() => (validator = null));
 
       it('should not add message on valid pattern', () => {
         // given
@@ -54,14 +57,16 @@ describe('PatternValidatorFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(jasmine.objectContaining({
-          pattern: {
-            requiredPattern: '^[a-zA-Z ]*$',
-            actualValue: '123!@#@',
-            message: 'Should match \'[a-zA-Z ]*\'.'
-          }
-        }));
+        expect(result).toEqual(
+          jasmine.objectContaining({
+            pattern: {
+              requiredPattern: '^[a-zA-Z ]*$',
+              actualValue: '123!@#@',
+              message: "Should match '[a-zA-Z ]*'.",
+            },
+          })
+        );
       });
-    })
-  })
+    });
+  });
 });

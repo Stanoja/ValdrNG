@@ -1,21 +1,21 @@
-import {BaseValidatorFactory} from './base-validator-factory';
-import {ValdrValidatorFn} from '../model';
+import { BaseValidatorFactory } from './base-validator-factory';
+import { ValdrValidatorFn } from '../model';
 
 describe('BaseValidatorFactory', () => {
   let validatorHandler: BaseValidatorFactory | null = null;
 
   beforeEach(() => {
-    validatorHandler = ({
+    validatorHandler = {
       createValidator(): ValdrValidatorFn {
         return () => null;
       },
       getConstraintName(): string {
         return 'constraintName';
-      }
-    }) as BaseValidatorFactory;
+      },
+    } as BaseValidatorFactory;
   });
 
-  afterAll(() => validatorHandler = null);
+  afterAll(() => (validatorHandler = null));
 
   it('should create validator', () => {
     // given / when / then

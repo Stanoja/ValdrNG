@@ -1,33 +1,35 @@
 <form [formGroup]="personForm" id="demo-form">
   <label>First name:</label>
-  <input formControlName="firstName">
+  <input formControlName="firstName" />
   <app-valdr-error [control]="this.personForm.get('firstName')">
   </app-valdr-error>
-  <br>
+  <br />
   <label>Username:</label>
-  <input formControlName="username">
+  <input formControlName="username" />
   <app-valdr-error [control]="this.personForm.get('username')">
   </app-valdr-error>
-  <br>
+  <br />
   <label>E-mail:</label>
-  <input formControlName="email">
+  <input formControlName="email" />
   <app-valdr-error [control]="this.personForm.get('email')"></app-valdr-error>
-  <br>
+  <br />
   <label>Age:</label>
-  <input formControlName="age" type="number">
+  <input formControlName="age" type="number" />
   <app-valdr-error [control]="this.personForm.get('age')"></app-valdr-error>
-  <br>
+  <br />
   <label>Homepage: </label>
-  <input formControlName="homepage">
-  <app-valdr-error [control]="this.personForm.get('homepage')"></app-valdr-error>
-  <br>
+  <input formControlName="homepage" />
+  <app-valdr-error
+    [control]="this.personForm.get('homepage')"></app-valdr-error>
+  <br />
   <label>Address line 1: </label>
-  <input formControlName="addressLine1">
-  <app-valdr-error [control]="this.personForm.get('addressLine1')"></app-valdr-error>
-  <br>
+  <input formControlName="addressLine1" />
+  <app-valdr-error
+    [control]="this.personForm.get('addressLine1')"></app-valdr-error>
+  <br />
   <label>My value: </label>
-  <input formControlName="myValue">
+  <input formControlName="myValue" />
   <app-valdr-error [control]="this.personForm.get('myValue')"></app-valdr-error>
   <p>First name manual validation result:</p>
-  <pre>{{output}}</pre>
+  <pre>{{ output }}</pre>
 </form>

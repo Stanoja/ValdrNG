@@ -1,5 +1,5 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {ValdrErrorComponent} from './valdr-error.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ValdrErrorComponent } from './valdr-error.component';
 
 describe('ValdrErrorComponent', () => {
   let component: ValdrErrorComponent;
@@ -7,9 +7,8 @@ describe('ValdrErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValdrErrorComponent ]
-    })
-    .compileComponents();
+      declarations: [ValdrErrorComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
