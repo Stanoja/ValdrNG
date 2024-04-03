@@ -135,6 +135,9 @@
             "styles": ["projects/valdr-ng-showcase/src/styles.scss"],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
