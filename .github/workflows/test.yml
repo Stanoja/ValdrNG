@@ -15,7 +15,7 @@ jobs:
       - name: Use Node.js 18.16.0
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16.0'
+          node-version: '20.18.0'
       - run: npm i
         working-directory: ./valdr-ng
       - run: npm run test-ci
