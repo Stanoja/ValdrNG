@@ -92,7 +92,7 @@ export class ValdrNgService {
         if (controls[field]) {
           controls[field]![1] = [
             ...(controls[field]![1] ?? []),
-            ...additionalValidators[field],
+            ...additionalValidators[field]!,
           ];
         } else {
           throw new Error(
