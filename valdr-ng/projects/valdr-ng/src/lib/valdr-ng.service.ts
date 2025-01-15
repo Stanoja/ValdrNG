@@ -146,6 +146,16 @@ export class ValdrNgService {
     return this.getValidators(fieldConstraints);
   }
 
+  public isValidatorAvailableForField(
+    typeName: string,
+    fieldName: string,
+  ): boolean {
+    const typeConstraints = this.constraints[typeName];
+    const fieldConstraints = typeConstraints?.[fieldName];
+    const isConstraintAvailable = fieldConstraints !== undefined;
+    return isConstraintAvailable && this.getValidators(fieldConstraints).length > 0;
+  }
+
   /**
    * Directly validate value for a given type and field.
    *

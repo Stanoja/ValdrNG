@@ -223,6 +223,61 @@ describe('ValdrNgService', () => {
     });
   });
 
+  describe('isValidatorAvailableForField', () => {
+    beforeEach(() => {
+      service.setConstraints({
+        Person: {
+          firstName: {
+            size: {
+              min: 2,
+              max: 20,
+              message: 'First name must be between 2 and 20 characters.',
+            },
+            required: {
+              message: 'First name is required.',
+            },
+          },
+        },
+      });
+    });
+
+    it('should return false if the type is not present', () => {
+      // given / when
+      const result = service.isValidatorAvailableForField('SomeModel', 'SomeField')
+
+      // then
+      expect(result).toBeFalse()
+    });
+
+    it('should return false if the field is not present', () => {
+      // given / when / then
+      const result = service.isValidatorAvailableForField('Person', 'SomeField')
+
+      // then
+      expect(result).toBeFalse()
+    });
+
+    it('should return true if a validator is available', () => {
+      // given / when
+      const result = service.isValidatorAvailableForField('Person', 'firstName');
+
+      // then
+      expect(result).toBe(true);
+    });
+
+    it('should return false if no validators are available for constraint', () => {
+      // given
+      (<any>service).validatorsPerField['required'] = null;
+      (<any>service).validatorsPerField['size'] = null;
+
+      // when
+      const result = service.isValidatorAvailableForField('Person', 'firstName');
+
+      // then
+      expect(result).toBeFalse();
+    });
+  });
+
   describe('addValidatorsToFormGroupControls', () => {
     let formGroup: UntypedFormGroup | null = null;
 
