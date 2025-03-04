@@ -15,7 +15,4 @@ export class DecimalMaxFactory extends DecimalFactory {
     return Validators.max(value);
   }
 
-  isExclusive(a: number, b: number): boolean {
-    return a < b;
-  }
 }

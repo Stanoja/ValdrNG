@@ -25,7 +25,7 @@ describe('DecimalMaxFactory', () => {
       ).toBeDefined();
     });
 
-    describe('should validate inclusive properly', () => {
+    describe('should validate allowed values', () => {
       let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
@@ -56,58 +56,31 @@ describe('DecimalMaxFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(
-          jasmine.objectContaining({
-            max: {
-              value: 10,
-              message: 'Should be less than 10.',
-            },
-          })
-        );
-      });
-    });
-
-    describe('should validate exclusive properly', () => {
-      let validator: ValdrValidatorFn | null = {} as any;
-
-      beforeEach(() => {
-        validator = decimalMaxFactory!.createValidator({
-          value: 20,
-          message: 'Should be less than 20.',
-          inclusive: false,
-        });
-      });
-
-      afterAll(() => (validator = null));
-
-      it('should not add message on lesser value', () => {
-        // given
-        const control: FormControl = new FormControl(19);
-
-        // when
-        const result = validator!(control);
-
-        // then
         expect(result).toBeNull();
       });
-
-      it('should add message on equal value', () => {
-        // given
-        const control: FormControl = new FormControl('20');
-
-        // when
-        const result = validator!(control);
-
-        // then
-        expect(result).toEqual(
-          jasmine.objectContaining({
-            max: {
-              value: 20,
-              message: 'Should be less than 20.',
-            },
-          })
-        );
-      });
     });
+
+    it('should add message on larger value', () => {
+      // given
+      const validator = decimalMaxFactory!.createValidator({
+        value: 10,
+        message: 'Should be less than 10.',
+      });
+      const control: FormControl = new FormControl('11');
+
+      // when
+      const result = validator!(control);
+
+      // then
+      expect(result).toEqual(
+        jasmine.objectContaining({
+          max: {
+            value: 10,
+            message: 'Should be less than 10.',
+          },
+        })
+      );
+    });
+
   });
 });

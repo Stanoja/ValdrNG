@@ -15,7 +15,4 @@ export class DecimalMinFactory extends DecimalFactory {
     return Validators.min(value);
   }
 
-  isExclusive(a: number, b: number): boolean {
-    return a > b;
-  }
 }
