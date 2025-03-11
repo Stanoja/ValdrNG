@@ -25,13 +25,13 @@ describe('DecimalMaxFactory', () => {
       ).toBeDefined();
     });
 
-    describe('should validate inclusive properly', () => {
+    describe('should validate without inclusive configuration properly', () => {
       let validator: ValdrValidatorFn | null = {} as any;
 
       beforeEach(() => {
         validator = decimalMaxFactory!.createValidator({
           value: 10,
-          message: 'Should be less than 10.',
+          message: 'Should be equal or less than 10.',
         });
       });
 
@@ -56,14 +56,43 @@ describe('DecimalMaxFactory', () => {
         const result = validator!(control);
 
         // then
-        expect(result).toEqual(
-          jasmine.objectContaining({
-            max: {
-              value: 10,
-              message: 'Should be less than 10.',
-            },
-          })
-        );
+        expect(result).toEqual(null);
+      });
+    });
+
+    describe('should validate inclusive properly', () => {
+      let validator: ValdrValidatorFn | null = {} as any;
+
+      beforeEach(() => {
+        validator = decimalMaxFactory!.createValidator({
+          value: 10,
+          inclusive: true,
+          message: 'Should be equal or less than 10.',
+        });
+      });
+
+      afterAll(() => (validator = null));
+
+      it('should not add message on lesser value', () => {
+        // given
+        const control: FormControl = new FormControl(9);
+
+        // when
+        const result = validator!(control);
+
+        // then
+        expect(result).toBeNull();
+      });
+
+      it('should add no message on equal value', () => {
+        // given
+        const control: FormControl = new FormControl('10');
+
+        // when
+        const result = validator!(control);
+
+        // then
+        expect(result).toEqual(null);
       });
     });
 
