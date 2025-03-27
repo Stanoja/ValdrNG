@@ -5,6 +5,7 @@ import { AbstractControl } from '@angular/forms';
   selector: 'app-valdr-error',
   templateUrl: './valdr-error.component.html',
   styleUrls: ['./valdr-error.component.scss'],
+  standalone: false,
 })
 export class ValdrErrorComponent {
   @Input() control: AbstractControl | null = null;

@@ -1,6 +1,6 @@
 {
   "name": "valdr-ng",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Library for creating Angular reactive form configuration.",
   "homepage": "https://github.com/Stanoja/ValdrNG",
   "author": {
@@ -17,9 +17,9 @@
     "Stanoja"
   ],
   "peerDependencies": {
-    "@angular/core": "^18.0.0",
-    "@angular/forms": "^18.0.0",
-    "@angular/common": "^18.0.0"
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/common": "^19.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
