@@ -7,6 +7,7 @@ import { Person } from '../model/person';
   selector: 'app-valdr-form',
   templateUrl: './valdr-form.component.html',
   styleUrls: ['./valdr-form.component.scss'],
+  standalone: false,
 })
 export class ValdrFormComponent implements OnInit {
   @Input() person: Person;

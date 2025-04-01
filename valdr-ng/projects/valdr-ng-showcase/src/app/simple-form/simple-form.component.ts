@@ -11,6 +11,7 @@ import { Person } from '../model/person';
   selector: 'app-simple-form',
   templateUrl: './simple-form.component.html',
   styleUrls: ['./simple-form.component.scss'],
+  standalone: false,
 })
 export class SimpleFormComponent implements OnInit {
   private readonly myUrlRegex =
