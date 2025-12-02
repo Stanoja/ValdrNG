@@ -12,7 +12,6 @@
     "test-ci": "ng test --browsers ChromeHeadless --watch=false",
     "lint": "ng lint"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^20.3.15",
     "@angular/common": "^20.3.15",
