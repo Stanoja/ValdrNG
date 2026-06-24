@@ -124,7 +124,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "main": "projects/valdr-ng-showcase/src/test.ts",
-            "polyfills": "projects/valdr-ng-showcase/src/polyfills.ts",
+            "polyfills": ["projects/valdr-ng-showcase/src/polyfills.ts"],
             "tsConfig": "projects/valdr-ng-showcase/tsconfig.spec.json",
             "karmaConfig": "projects/valdr-ng-showcase/karma.conf.js",
             "inlineStyleLanguage": "scss",
