@@ -15,7 +15,7 @@
       "prefix": "vng",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/valdr-ng/ng-package.json"
           },
@@ -30,7 +30,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/valdr-ng/src/test.ts",
             "tsConfig": "projects/valdr-ng/tsconfig.spec.json",
@@ -54,12 +54,13 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/valdr-ng-showcase",
+            "outputPath": {
+              "base": "dist/valdr-ng-showcase"
+            },
             "index": "projects/valdr-ng-showcase/src/index.html",
-            "main": "projects/valdr-ng-showcase/src/main.ts",
-            "polyfills": "projects/valdr-ng-showcase/src/polyfills.ts",
+            "polyfills": ["projects/valdr-ng-showcase/src/polyfills.ts"],
             "tsConfig": "projects/valdr-ng-showcase/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -67,7 +68,8 @@
               "projects/valdr-ng-showcase/src/assets"
             ],
             "styles": ["projects/valdr-ng-showcase/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/valdr-ng-showcase/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -92,9 +94,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -103,7 +103,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "valdr-ng-showcase:build:production"
@@ -115,13 +115,13 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "valdr-ng-showcase:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/valdr-ng-showcase/src/test.ts",
             "polyfills": "projects/valdr-ng-showcase/src/polyfills.ts",
