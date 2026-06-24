@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ValdrNgModule } from '../../../valdr-ng/src/lib/valdr-ng.module';
+import {
+  ValdrNgModule,
+  ValdrNgService,
+} from '../../../valdr-ng/src/public-api';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValdrErrorComponent } from './valdr-error/valdr-error.component';
 import { ValdrFormComponent } from './valdr-form/valdr-form.component';
 import { SimpleFormComponent } from './simple-form/simple-form.component';
-import { ValdrNgService } from '../../../valdr-ng/src/lib/valdr-ng.service';
 import { ValueValidator } from './validators/value.validator';
 
 import * as constraints from '../assets/constraints.json';

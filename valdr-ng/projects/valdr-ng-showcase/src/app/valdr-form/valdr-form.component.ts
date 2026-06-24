@@ -4,7 +4,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { ValdrNgService } from '../../../../valdr-ng/src/lib/valdr-ng.service';
+import { ValdrNgService } from '../../../../valdr-ng/src/public-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Person } from '../model/person';
 
