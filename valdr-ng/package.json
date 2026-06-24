@@ -54,6 +54,8 @@
     "typescript": "^5.9.3"
   },
   "overrides": {
-    "@modelcontextprotocol/sdk": "^1.24.0"
+    "@modelcontextprotocol/sdk": "^1.24.0",
+    "http-proxy-middleware": "^3.0.7",
+    "undici": "^7.28.0"
   }
 }
