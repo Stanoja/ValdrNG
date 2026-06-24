@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +16,7 @@ import { Person } from '../model/person';
   selector: 'app-simple-form',
   templateUrl: './simple-form.component.html',
   styleUrls: ['./simple-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SimpleFormComponent implements OnInit {
