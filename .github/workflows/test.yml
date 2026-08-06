@@ -11,6 +11,10 @@ jobs:
   test:
     runs-on: [self-hosted]
     steps:
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          install-dependencies: true
       - uses: actions/checkout@v3
       - name: Use Node.js 24.1.0
         uses: actions/setup-node@v3
@@ -20,3 +24,5 @@ jobs:
         working-directory: ./valdr-ng
       - run: npm run test-ci
         working-directory: ./valdr-ng
+        env:
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
