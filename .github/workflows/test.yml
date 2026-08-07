@@ -20,3 +20,5 @@ jobs:
         working-directory: ./valdr-ng
       - run: npm run test-ci
         working-directory: ./valdr-ng
+        env:
+          CHROME_BIN: /usr/bin/chromium
