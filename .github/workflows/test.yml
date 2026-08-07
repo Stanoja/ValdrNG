@@ -20,5 +20,3 @@ jobs:
         working-directory: ./valdr-ng
       - run: npm run test-ci
         working-directory: ./valdr-ng
-        env:
-          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
