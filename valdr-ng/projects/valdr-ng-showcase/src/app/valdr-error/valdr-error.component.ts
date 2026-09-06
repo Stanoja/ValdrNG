@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-valdr-error',
   templateUrl: './valdr-error.component.html',
   styleUrls: ['./valdr-error.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ValdrErrorComponent {

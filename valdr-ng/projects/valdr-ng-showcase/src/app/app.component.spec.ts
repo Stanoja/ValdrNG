@@ -1,14 +1,26 @@
+import { Component, Input } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ValdrErrorComponent } from './valdr-error/valdr-error.component';
+import { Person } from './model/person';
+
+@Component({ selector: 'app-simple-form', template: '', standalone: false })
+class SimpleFormStubComponent {
+  @Input() person: Person | undefined;
+}
+
+@Component({ selector: 'app-valdr-form', template: '', standalone: false })
+class ValdrFormStubComponent {
+  @Input() person: Person | undefined;
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ReactiveFormsModule],
-      declarations: [AppComponent, ValdrErrorComponent],
+      declarations: [
+        AppComponent,
+        SimpleFormStubComponent,
+        ValdrFormStubComponent,
+      ],
     }).compileComponents();
   });
 

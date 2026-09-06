@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ValdrNgService } from '../../../../valdr-ng/src/lib/valdr-ng.service';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { ValdrNgService } from '../../../../valdr-ng/src/public-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Person } from '../model/person';
 
@@ -7,6 +12,7 @@ import { Person } from '../model/person';
   selector: 'app-valdr-form',
   templateUrl: './valdr-form.component.html',
   styleUrls: ['./valdr-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ValdrFormComponent implements OnInit {
